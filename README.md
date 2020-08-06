@@ -29,3 +29,13 @@ methods={"DELETE"}
   /order/{idProject}/{idUser}
   methods={"POST"}
 ```
+#### Get Order By Id
+```
+  /order/{id}
+  methods={"GET"}
+```
+#### Get All Orders
+```
+/orders
+methods={"GET"}
+```
