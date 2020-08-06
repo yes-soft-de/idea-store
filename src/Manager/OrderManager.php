@@ -13,6 +13,7 @@ use App\Entity\Project;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Flex\Response;
+use App\Request\GetByIdRequest;
 
 class OrderManager
 {
@@ -46,5 +47,16 @@ class OrderManager
         $this->entityManager->clear();
         return $orderEntity;
     }
-    
+
+    public function getAll()
+    {
+        $data = $this->orderRepository->getAll();
+
+        return $data;
+    }
+
+    public function getOrderById(GetByIdRequest $request)
+    {
+        return $result = $this->orderRepository->findOrderByld($request->getId());
+    }
 }

@@ -6,7 +6,8 @@ use App\AutoMapping;
 use App\Manager\OrderManager;
 use App\Respons\CreateOrderResponse;
 use App\Entity\Orders;
-
+use App\Respons\GetOrdersResponse;
+use App\Respons\GetOrderByIdResponse;
 class OrderService
 {
     private $orderManager;
@@ -34,4 +35,23 @@ class OrderService
         return $response;
     }
 
+    public function getAll()
+    {
+        $result = $this->orderManager->getAll();
+        $response = [];
+        foreach ($result as $row) {
+            $response[] = $this->autoMapping->map('array'::class, GetOrdersResponse::class, $row);
+        }
+        return $response;
+    }
+
+    public function getOrderById($request)
+    {
+        $result = $this->orderManager->getOrderById($request);
+
+        foreach ($result as $row) {
+            $response[] = $this->autoMapping->map('array', GetOrderByIdResponse::class, $row);
+        }
+        return $response;
+    }
 }
