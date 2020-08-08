@@ -83,13 +83,16 @@ class ImageManager
             $project= $this->entityManager->getRepository(Project::class)
             ->find($request->project);
             $request->setProject($project);
+           
         }
         $imageEntity = $this->imageRepository->findImageByld($project->getId());
+        
         if (!$imageEntity) {
-
+           
         } else {
             $imageEntity = $this->autoMapping->mapToObject(UpdateImageRequest::class,
                 Images::class, $request, $imageEntity);
+              
             $this->entityManager->flush();
             return $imageEntity;
         }

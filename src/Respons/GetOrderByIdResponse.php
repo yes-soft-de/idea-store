@@ -65,7 +65,7 @@ class GetOrderByIdResponse
        return $this;
    }
 
- /**
+    /**
      * @return mixed
      */
     public function getProjectName(): ?string
@@ -99,7 +99,7 @@ class GetOrderByIdResponse
 
         return $this;
     }
-/**
+    /**
      * @return mixed
      */
     public function getImage(): ?string

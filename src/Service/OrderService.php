@@ -7,16 +7,16 @@ use App\Manager\OrderManager;
 use App\Respons\CreateOrderResponse;
 use App\Entity\Orders;
 use App\Respons\GetOrdersResponse;
-use App\Respons\GetOrderByIdResponse;
+use App\Respons\UpdateOrderResponse;
 class OrderService
 {
     private $orderManager;
     private $autoMapping;
-    private $projectManager;
+    //private $userManager;
     public function __construct(OrderManager $orderManager, AutoMapping $autoMapping)
     {
-        $this->orderManager  = $orderManager;
-        $this->autoMapping   = $autoMapping;
+        $this->orderManager    = $orderManager;
+        $this->autoMapping     = $autoMapping;
     }
 
     public function create($request, $idProject, $idUser)
@@ -29,7 +29,7 @@ class OrderService
         $orderResult->getProject($idProject);
         $orderResult->getUser($idUser);
        
-        $response    = $this->autoMapping->map(Orders::class, CreateOrderResponse::class,
+        $response = $this->autoMapping->map(Orders::class, CreateOrderResponse::class,
             $orderResult);
 
         return $response;
@@ -48,10 +48,30 @@ class OrderService
     public function getOrderById($request)
     {
         $result = $this->orderManager->getOrderById($request);
-
+        $response=[];
         foreach ($result as $row) {
             $response[] = $this->autoMapping->map('array', GetOrderByIdResponse::class, $row);
         }
+        // $response = $this->autoMapping->map(Orders::class, GetOrderByIdResponse::class, $result);
+        return $response;
+    }
+
+    public function delete($request)
+    {
+        $orderResult   = $this->orderManager->delete($request);
+        $response = $this->autoMapping->map(Orders::class, GetOrderByIdResponse::class, $orderResult);
+       
+        return $response;
+
+    }
+
+    public function update($request)
+    {
+
+        $orderResult = $this->orderManager->update($request);
+
+        $response = $this->autoMapping->map(Orders::class, UpdateOrderResponse::class, $orderResult);
+       
         return $response;
     }
 }

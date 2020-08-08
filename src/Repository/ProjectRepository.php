@@ -77,7 +77,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function getAll()
     {
         $res = $this->createQueryBuilder('p')
-            ->select('p.id', 'p.projectName', 'p.description', 'i.image')
+            ->select('p.id', 'p.projectName', 'p.description','i.image')
             ->from('App:Images', 'i')
             ->andWhere('p.id=i.project')
             ->getQuery()

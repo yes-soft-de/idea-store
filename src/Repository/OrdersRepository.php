@@ -49,6 +49,7 @@ class OrdersRepository extends ServiceEntityRepository
     }
     */
     public function getAll()
+    
     {          
         $res = $this->createQueryBuilder('Orders')
         ->select('Orders.id','p.projectName','p.description','u.userName','u.email','u.phone','i.image')
@@ -60,12 +61,19 @@ class OrdersRepository extends ServiceEntityRepository
             ->andWhere('p.id=i.project')
             ->getQuery()
             ->getResult();
+           
        return $res;
     }
-      /**
-     * @return Project[] Returns an array of Project objects
-     */
-    public function findOrderByld($id): array
+    public function findOByld($id): ?Orders
+    {
+        return $res = $this->createQueryBuilder('Orders')
+            ->andWhere('Orders.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+           ->getOneOrNullResult();
+
+    }
+    public function findOrderWithByld($id)
     {
         $res = $this->createQueryBuilder('Orders')
         ->select('Orders.id','p.projectName','p.description','u.userName','u.email','u.phone','i.image')
@@ -78,7 +86,6 @@ class OrdersRepository extends ServiceEntityRepository
             ->andWhere('p.id=i.project')
             ->setParameter('id', $id)
             ->getQuery()
-            
             ->getResult();
        return $res;
         
