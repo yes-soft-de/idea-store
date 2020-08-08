@@ -24,7 +24,7 @@ methods={"GET"}
 /project/{id}
 methods={"DELETE"}
 ```
-#### Update Order 
+#### Update Project 
 ```
 /project/{id}
 methods={"PUT"}
