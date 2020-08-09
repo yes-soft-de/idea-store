@@ -24,6 +24,11 @@ methods={"GET"}
 /project/{id}
 methods={"DELETE"}
 ```
+#### Update Project 
+```
+/project/{id}
+methods={"PUT"}
+```
 #### Create Order
 ```
   /order/{idProject}/{idUser}
@@ -38,4 +43,14 @@ methods={"DELETE"}
 ```
 /orders
 methods={"GET"}
+```
+#### Delete Order By Id
+```
+/order/{id}
+methods={"DELETE"}
+```
+#### Update Order 
+```
+/order/{id}/{idProject}/{idUser}
+methods={"PUT"}
 ```
