@@ -58,7 +58,7 @@ class ProjectService
     public function getProjectById($request)
     {
         $result = $this->projectManager->getProjectById($request);
-
+        $response=[];
         foreach ($result as $row) {
             $response[] = $this->autoMapping->map('array', GetProjectByIdResponse::class, $row);
         }

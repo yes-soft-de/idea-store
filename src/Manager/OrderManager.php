@@ -30,6 +30,7 @@ class OrderManager
     {
 
         if ($request->project && $request->user) {
+            
             $project = $this->entityManager->getRepository(Project::class)
                 ->find($request->project);
             $request->setProject($project);
@@ -55,7 +56,7 @@ class OrderManager
 
     public function getOrderById(GetByIdRequest $request)
     {
-        return $result = $this->orderRepository->findOrderByld($request->getId());
+        return $result = $this->orderRepository->findOrderWithByld($request->getId());
     }
 
     public function delete(DeleteRequest $request)

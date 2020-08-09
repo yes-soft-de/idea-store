@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Project;
+use App\Entity\Images;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method Project|null find($id, $lockMode = null, $lockVersion = null)
@@ -51,7 +53,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function findProjectByld($id): ?Project
     {
         return $res = $this->createQueryBuilder('project')
-            //  ->from('App:Images', 'i')
+            
             ->andWhere('project.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
@@ -66,9 +68,17 @@ class ProjectRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
             ->select('p.id', 'p.projectName', 'p.description', 'i.image')
-            ->from('App:Images', 'i')
-            ->andWhere('p.id=:id')
-            ->andWhere('p.id=i.project')
+            // ->from('App:Images', 'i')
+            // ->andWhere('p.id=:id')
+            // ->andWhere('p.id=i.project')
+            // ->setParameter('id', $id)
+            ->leftJoin(
+                Images::class,     // Entity
+                'i',               // Alias
+                Join::WITH,        // Join type
+               'p.id = i.project'  // Join columns
+                )
+            ->andWhere('p.id=:id')  
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
@@ -77,12 +87,17 @@ class ProjectRepository extends ServiceEntityRepository
     public function getAll()
     {
         $res = $this->createQueryBuilder('p')
-            ->select('p.id', 'p.projectName', 'p.description','i.image')
-            ->from('App:Images', 'i')
-            ->andWhere('p.id=i.project')
+            ->addSelect('p.id','p.projectName','p.description','i.image')
+        
+            ->leftJoin(
+            Images::class,           // Entity
+            'i',                    // Alias
+            Join::WITH,            // Join type
+           'p.id = i.project'     // Join columns
+            )
             ->getQuery()
             ->getResult();
         return $res;
     }
-
+  
 }
