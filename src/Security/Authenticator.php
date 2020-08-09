@@ -29,6 +29,7 @@ class Authenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+        //var_dump($credentials['email']);die;
         return $userProvider->loadUserByUsername($credentials['email']);
     }
 
