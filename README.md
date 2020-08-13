@@ -58,7 +58,7 @@ methods={"PUT"}
 
 ## Security APIs Guide 
 
-#### Create User
+#### Create new user
 ```
   Path: /register
   methods={"POST"}
@@ -78,14 +78,12 @@ methods={"PUT"}
   Path: /login
   methods={"POST"}
 ```
-#### Get User's Profile 
+#### Get logged-in user's Profile 
 ```
   Path: /profile
   methods={"GET"}
 ```
 #### Logout 
-```
-#### Logout
 ```
   Path: /logout
   
