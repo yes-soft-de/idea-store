@@ -1,31 +1,37 @@
 <?php
 
+
 namespace App\Request;
 
-class CreateImageRequest
+class UpdateImageRequest
 {
-    
-<<<<<<< HEAD
-    private $id;
-    private $image;
-    private $project;
-=======
     public $id;
     public $image;
     public $project;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
+
 
     /**
      * @return mixed
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+
     /**
      * @return mixed
      */
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -57,4 +63,7 @@ class CreateImageRequest
         $this->project = $project;
 
     }
+
+    
+
 }

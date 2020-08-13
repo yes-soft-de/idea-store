@@ -90,6 +90,12 @@ class ProjectController extends BaseController
         $id = $request->get('id');
         $request = $this->autoMapping->map(\stdClass::class, UpdateProjectRequest::class, (object) $data);
         $request->setId($id);
+<<<<<<< HEAD
+=======
+
+        $request->setImage($request->getImage('image'));
+        
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
         $result = $this->projectService->update($request);
         return $this->response($result, self::UPDATE);
     }

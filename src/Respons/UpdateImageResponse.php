@@ -1,31 +1,37 @@
 <?php
 
-namespace App\Request;
 
-class CreateImageRequest
+namespace App\Respons;
+
+class UpdateImageResponse
 {
-    
-<<<<<<< HEAD
-    private $id;
-    private $image;
-    private $project;
-=======
     public $id;
     public $image;
     public $project;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
+
 
     /**
      * @return mixed
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+
     /**
      * @return mixed
      */
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -44,17 +50,20 @@ class CreateImageRequest
     /**
      * @return mixed
      */
-    public function getProject()
+    public function getProject(): ?string
     {
         return $this->project;
     }
-
     /**
      * @param mixed $project
      */
-    public function setProject($project): void
+    public function setProject(?string $project): self
     {
         $this->project = $project;
 
+        return $this;
     }
+
+    
+
 }

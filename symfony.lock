@@ -81,6 +81,7 @@
     "doctrine/sql-formatter": {
         "version": "1.1.0"
     },
+<<<<<<< HEAD
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -90,6 +91,8 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     "mark-gerarts/auto-mapper-plus": {
         "version": "1.3.12"
     },
@@ -100,7 +103,11 @@
         "version": "2.2.3"
     },
     "php": {
+<<<<<<< HEAD
         "version": "7.4"
+=======
+        "version": "7.3"
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -123,6 +130,7 @@
     "psr/log": {
         "version": "1.1.3"
     },
+<<<<<<< HEAD
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -135,6 +143,8 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     "symfony/cache": {
         "version": "v5.1.2"
     },
@@ -309,6 +319,7 @@
     "symfony/string": {
         "version": "v5.1.2"
     },
+<<<<<<< HEAD
     "symfony/translation-contracts": {
         "version": "v2.1.3"
     },
@@ -325,6 +336,8 @@
             "./config/packages/validator.yaml"
         ]
     },
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     "symfony/var-dumper": {
         "version": "v5.1.2"
     },
@@ -334,9 +347,12 @@
     "symfony/yaml": {
         "version": "v5.1.2"
     },
+<<<<<<< HEAD
     "webimpress/safe-writer": {
         "version": "2.0.1"
     },
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     "webmozart/assert": {
         "version": "1.9.1"
     },

@@ -8,7 +8,32 @@ class GetProjectsResponse
     public $projectName;
     public $description;
     public $image;
+<<<<<<< HEAD
     
+=======
+    public $id;
+   
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+   
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     /**
      * @return mixed
      */

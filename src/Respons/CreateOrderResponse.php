@@ -1,21 +1,15 @@
 <?php
 
-namespace App\Request;
+namespace App\Respons;
 
-class CreateImageRequest
+class CreateOrderResponse
 {
-    
-<<<<<<< HEAD
-    private $id;
-    private $image;
-    private $project;
-=======
+   
     public $id;
-    public $image;
+    public $user;
     public $project;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
-
-    /**
+    
+   /**
      * @return mixed
      */
     public function getId(): ?int
@@ -25,23 +19,21 @@ class CreateImageRequest
     /**
      * @return mixed
      */
-
-    public function getImage(): ?string
+    public function getUser()
     {
-        return $this->image;
+        return $this->user;
     }
-
-    /**
-     * @param mixed $image
+   /**
+     * @param mixed $user
      */
-    public function setImage(string $image): self
+    public function setUser($user): self
     {
-        $this->image = $image;
+        $this->user = $user;
 
         return $this;
     }
 
-    /**
+   /**
      * @return mixed
      */
     public function getProject()
@@ -57,4 +49,5 @@ class CreateImageRequest
         $this->project = $project;
 
     }
+
 }

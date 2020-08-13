@@ -64,6 +64,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+<<<<<<< HEAD
 
     public function findUserById($id): ?User
     {
@@ -80,4 +81,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
     }
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 }
