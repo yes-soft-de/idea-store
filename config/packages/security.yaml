@@ -21,6 +21,11 @@ security:
             guard:
                 authenticators:
                     - App\Security\Authenticator
+<<<<<<< HEAD
+            logout:
+                path: user_logout
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

@@ -5,9 +5,16 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+<<<<<<< HEAD
+use Symfony\Component\Serializer\Annotation\Groups;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+=======
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
  */
 class User implements UserInterface
 {
@@ -15,16 +22,28 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+<<<<<<< HEAD
+     * @Groups("api")
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+<<<<<<< HEAD
+     * @Groups("api")
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+<<<<<<< HEAD
+     * @Groups("api")
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     private $roles = [];
 
@@ -36,19 +55,47 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+<<<<<<< HEAD
+     * @Groups("api")
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     private $userName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+<<<<<<< HEAD
+     * @Groups("api")
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     private $phone;
 
     /**
+<<<<<<< HEAD
+     * @ORM\Column(type="date", nullable=true)
+     * @Groups("api")
+     */
+    private $createdTime;
+
+    /*public function __construct()
+    {
+        $this->createdTime = new \DateTime();
+    }*/
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->createdTime = new \DateTime('now');
+    }
+
+=======
      * @ORM\Column(type="date")
      */
     private $createdTime;
 
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     public function getId(): ?int
     {
         return $this->id;
@@ -153,8 +200,12 @@ class User implements UserInterface
 
     public function setCreatedTime(\DateTimeInterface $createdTime): self
     {
+<<<<<<< HEAD
+        $this->createdTime = new \DateTime('now');
+=======
         $this->createdTime = $createdTime;
 
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
         return $this;
     }
 }

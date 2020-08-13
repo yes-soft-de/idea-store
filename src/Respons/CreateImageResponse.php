@@ -26,7 +26,11 @@ class CreateImageResponse
     }
 
     /**
+<<<<<<< HEAD
+     * @param mixed $projectName
+=======
      * @param mixed $image
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      */
     public function setImage(string $image): self
     {

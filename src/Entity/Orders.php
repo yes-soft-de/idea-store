@@ -25,7 +25,11 @@ class Orders
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
      */
+<<<<<<< HEAD
+    private $project;
+=======
     public $project;
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 
     public function getId(): ?int
     {

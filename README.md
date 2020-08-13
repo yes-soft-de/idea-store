@@ -54,3 +54,37 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
+
+
+## Security APIs Guide 
+
+#### Create new user
+```
+  Path: /register
+  methods={"POST"}
+```
+#### Get All Users
+```
+  Path: /users
+  methods={"GET"}
+```
+#### Get User By Id
+```
+  Path: /users/{id}
+  methods={"GET"}
+```
+#### Login
+```
+  Path: /login
+  methods={"POST"}
+```
+#### Get logged-in user's Profile 
+```
+  Path: /profile
+  methods={"GET"}
+```
+#### Logout 
+```
+  Path: /logout
+  
+```

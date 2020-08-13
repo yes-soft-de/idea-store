@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+user_logout:
+  path: /logout
+=======
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
