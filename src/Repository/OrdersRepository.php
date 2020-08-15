@@ -55,12 +55,6 @@ class OrdersRepository extends ServiceEntityRepository
     {
         $res = $this->createQueryBuilder('Orders')
             ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName', 'u.email', 'u.phone', 'i.image')
-        // ->from('App:Project', 'p')
-        // ->from('App:Images', 'i')
-        // ->from('App:User', 'u')
-        // ->andWhere('Orders.project=p.id')
-        // ->andWhere('Orders.user=u.id')
-        // ->andWhere('p.id=i.project')
             ->leftJoin(
                 User::class,            // Entity
                 'u',                   // Alias
@@ -97,13 +91,6 @@ class OrdersRepository extends ServiceEntityRepository
     {
         $res = $this->createQueryBuilder('Orders')
             ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName', 'u.email', 'u.phone', 'i.image')
-        // ->from('App:Project', 'p')
-        // ->from('App:Images', 'i')
-        // ->from('App:User', 'u')
-        // ->andWhere('Orders.id=:id')
-        // ->andWhere('Orders.project=p.id')
-        // ->andWhere('Orders.user=u.id')
-        // ->andWhere('p.id=i.project')
             ->leftJoin(
                 User::class,             // Entity
                 'u',                     // Alias

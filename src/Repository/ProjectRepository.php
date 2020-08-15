@@ -68,10 +68,7 @@ class ProjectRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
             ->select('p.id', 'p.projectName', 'p.description', 'i.image')
-            // ->from('App:Images', 'i')
-            // ->andWhere('p.id=:id')
-            // ->andWhere('p.id=i.project')
-            // ->setParameter('id', $id)
+        
             ->leftJoin(
                 Images::class,     // Entity
                 'i',               // Alias
