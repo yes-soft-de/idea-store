@@ -29,10 +29,6 @@ class Project
      */
     private $description;
  
-<<<<<<< HEAD
-=======
-    
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     private $image;
 
     /**
@@ -126,20 +122,12 @@ class Project
         return $this;
     }
    
-<<<<<<< HEAD
-    public function getImage(): ?string
-=======
     public function getImage(): ?Images
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     {
         return $this->image;
     }
 
-<<<<<<< HEAD
-    public function setImage(string $image): self
-=======
     public function setImage(?Images $image): self
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     {
         $this->image = $image;
 

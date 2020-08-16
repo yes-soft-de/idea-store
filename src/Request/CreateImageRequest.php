@@ -5,15 +5,9 @@ namespace App\Request;
 class CreateImageRequest
 {
     
-<<<<<<< HEAD
-    private $id;
-    private $image;
-    private $project;
-=======
     public $id;
     public $image;
     public $project;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 
     /**
      * @return mixed
