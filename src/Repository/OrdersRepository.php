@@ -2,12 +2,17 @@
 
 namespace App\Repository;
 
+<<<<<<< HEAD
+use App\Entity\Orders;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+=======
 use App\Entity\Images;
 use App\Entity\Orders;
 use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -29,6 +34,18 @@ class OrdersRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
+<<<<<<< HEAD
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('o.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+=======
     return $this->createQueryBuilder('o')
     ->andWhere('o.exampleField = :val')
     ->setParameter('val', $value)
@@ -39,10 +56,21 @@ class OrdersRepository extends ServiceEntityRepository
     ;
     }
      */
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 
     /*
     public function findOneBySomeField($value): ?Orders
     {
+<<<<<<< HEAD
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
+=======
     return $this->createQueryBuilder('o')
     ->andWhere('o.exampleField = :val')
     ->setParameter('val', $value)
@@ -117,4 +145,5 @@ class OrdersRepository extends ServiceEntityRepository
 
     }
 
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 }

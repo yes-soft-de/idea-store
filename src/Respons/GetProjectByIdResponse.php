@@ -7,7 +7,10 @@ class GetProjectByIdResponse
 {
     public $projectName;
     public $description;
+<<<<<<< HEAD
+=======
     public $image;
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     
     /**
      * @return mixed
@@ -43,6 +46,9 @@ class GetProjectByIdResponse
 
         return $this;
     }
+<<<<<<< HEAD
+
+=======
 /**
      * @return mixed
      */
@@ -59,4 +65,5 @@ class GetProjectByIdResponse
 
         return $this;
     }
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 }

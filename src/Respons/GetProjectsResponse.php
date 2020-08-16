@@ -8,6 +8,9 @@ class GetProjectsResponse
     public $projectName;
     public $description;
     public $image;
+<<<<<<< HEAD
+    
+=======
     public $id;
    
 
@@ -30,6 +33,7 @@ class GetProjectsResponse
     }
 
    
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
     /**
      * @return mixed
      */

@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+<<<<<<< HEAD
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+=======
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -68,7 +72,11 @@ class BaseController extends AbstractController
     public function response($result, $status) :jsonResponse
     {
         $encoders = [ new JsonEncoder()];
+<<<<<<< HEAD
+        $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer()];
+=======
         $normalizers = [new ObjectNormalizer()];
+>>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
         $this->serializer=new Serializer($normalizers, $encoders);
                 $result = $this->serializer->serialize($result, "json", [
                     'enable_max_depth' => true]);
