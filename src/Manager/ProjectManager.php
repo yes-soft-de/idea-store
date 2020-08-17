@@ -82,5 +82,10 @@ class ProjectManager
             return $projectEntity;
         }
     }
-    
+    public function getAllFeaturedIdeas()
+    {
+        $data = $this->projectRepository->getAllFeaturedIdeas();
+
+        return $data;
+    }
 }

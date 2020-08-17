@@ -96,6 +96,14 @@ class ProjectController extends BaseController
         $result = $this->projectService->update($request);
         return $this->response($result, self::UPDATE);
     }
- 
+   /**
+     * @Route("/FeaturedIdeas", name="getAllFeaturedIdeas",methods={"GET"})
+     * @return JsonResponse
+     */
+    public function getAllFeaturedIdeas()
+    {
+        $result = $this->projectService->getAllFeaturedIdeas();
+        return $this->response($result, self::FETCH);
+    }
   
 }

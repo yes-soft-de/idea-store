@@ -102,13 +102,14 @@ class CategoriesController  extends BaseController
         return $this->response(" ", self::DELETE);
 
     }
-    //  /**
-    //  * @Route("/categoriesWithProject", name="getAllCategoriesWithProject",methods={"GET"})
-    //  * @return JsonResponse
-    //  */
-    // public function getAllCategoriesWithProject()
-    // {
-    //     $result = $this->categoryService->getAllCategoriesWithProjectService();
-    //     return $this->response($result, self::FETCH);
-    // }
+     /**
+     * @Route("/categoriesWithProject", name="getAllCategoriesWithProject",methods={"GET"})
+     * @return JsonResponse
+     */
+    public function getAllCategoriesWithProject()
+    {
+        $result = $this->categoryService->getAllCategoriesWithProjectService();
+        
+        return $this->response($result, self::FETCH);
+    }
 }

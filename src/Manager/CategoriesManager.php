@@ -32,12 +32,7 @@ class CategoriesManager
 
     public function create(CreateCategoryRequest $request)
     {
-        // if($request->project){
-        //     $project= $this->entityManager->getRepository(Project::class)
-        //     ->find($request->project);
-        //     $request->setProject($project);
-        // }
-        
+            
         $categoryEntity = $this->autoMapping->map(CreateCategoryRequest::class, Categories::class, $request);
 
         $this->entityManager->persist($categoryEntity);
@@ -88,11 +83,10 @@ class CategoriesManager
         }
     }
 
-    // public function getAllCategoriesWithProject()
-    // {
-    //     $data = $this->categoryRepository->getAllCategoriesWithProject();
-
-    //     return $data;
-    // }
+    public function getAllCategoriesWithProject()
+    {
+        $data = $this->categoryRepository->getAllCategoriesWithProject();
+        return $data;
+    }
 
 }

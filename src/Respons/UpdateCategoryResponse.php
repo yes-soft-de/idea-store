@@ -30,7 +30,7 @@ class UpdateCategoryResponse
      */
     public function setCategory(string $category): self
     {
-        $this->category = $image;
+        $this->category = $category;
 
         return $this;
     }
