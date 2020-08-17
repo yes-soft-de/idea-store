@@ -6,7 +6,7 @@ use App\Repository\ArticlesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticlesRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
  */
 class Articles
 {
@@ -68,7 +68,8 @@ class Articles
 
     public function setDate(?\DateTimeInterface $date): self
     {
-        $this->date = $date;
+        //$this->date = $date;
+        $this->date = new \DateTime('Now');
 
         return $this;
     }

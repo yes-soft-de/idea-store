@@ -3,6 +3,7 @@
 
 ## API guide 
 
+### Projects
 #### Create Project
 ```
   /project
@@ -29,6 +30,7 @@ methods={"DELETE"}
 /project/{id}
 methods={"PUT"}
 ```
+### Orders
 #### Create Order
 ```
   /order/{idProject}/{idUser}
@@ -54,8 +56,32 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
-
-
+### Articles
+#### Create new article
+```
+/articles
+method={"POST"}
+```
+#### Update existing article
+```
+/articles/{id}
+method={"PUT"}
+```
+#### Get an article by ID
+```
+/articles/{id}
+method={"GET"}
+```
+#### Get all articles
+```
+/articles
+method={"GET"}
+```
+#### Delete existing article
+```
+/articles/{id}
+method={"DELETE"}
+```
 ## Security APIs Guide 
 
 #### Create new user
