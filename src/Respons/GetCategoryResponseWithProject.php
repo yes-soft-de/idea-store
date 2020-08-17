@@ -3,13 +3,13 @@
 
 namespace App\Respons;
 
-class GetOrderByIdResponse
+class GetCategoryResponseWithProject
 {
-    public $project;
-    public $userName;  
-    public $user; 
-    public $projectName;
+   
+    public $category;
     public $description;
+    public $projectName;
+    public $descriptionPro;
     public $image;
     public $ideaCode;
     public $DurationOfImplementation;
@@ -21,66 +21,43 @@ class GetOrderByIdResponse
     public $country;
     public $platforms;
     public $linkUX;
-    public $category;
-    public $isFeaturedIdea;
-    public $email;
-    public $phone;
-   
-    /**
-     * @param mixed $userName
-     */
-    public function setUserName($userName): self
+
+
+    public function getCategory(): ?string
     {
-        $this->userName = $userName;
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory(string $category): self
+    {
+        $this->category = $image;
 
         return $this;
-    } 
-    
-    /**
-    * @return mixed
-    */
-   public function getUserName()
-   {
-       return $this->userName;
-   }
-/**
-    * @return mixed
-    */
-   public function getPhone(): ?string
-   {
-       return $this->phone;
-   }
-/**
-     * @param mixed $phone
-     */
-   public function setPhone(?string $phone): self
-   {
-       $this->phone = $phone;
-
-       return $this;
-   }
-
-   /**
-    * @return mixed
-    */
-   public function getEmail(): ?string
-   {
-       return $this->email;
-   }
-    /**
-     * @param mixed $email
-     */
-   public function setEmail(string $email): self
-   {
-       $this->email = $email;
-
-       return $this;
-   }
+    }
 
     /**
      * @return mixed
      */
-    public function getProjectName(): ?string
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+
+    }
+    /**
+     * @return mixed
+     */
+    private function getProjectName(): ?string
     {
         return $this->projectName;
     }
@@ -88,33 +65,34 @@ class GetOrderByIdResponse
     /**
      * @param mixed $projectName
      */
-    public function setProjectName(string $projectName): self
+    private function setProjectName(string $projectName): self
     {
         $this->projectName = $projectName;
 
         return $this;
     }
 
-/**
+    /**
      * @return mixed
      */
-    public function getDescription(): ?string
+    private function getDescriptionPro(): ?string
     {
-        return $this->description;
+        return $this->descriptionPro;
     }
     /**
-     * @param mixed $description
+     * @param mixed $descriptionPro
      */
-    public function setDescription(?string $description): self
+    private function setDescriptionPro(?string $descriptionPro): self
     {
-        $this->description = $description;
+        $this->descriptionPro = $descriptionPro;
 
         return $this;
     }
+
     /**
      * @return mixed
      */
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
@@ -122,44 +100,12 @@ class GetOrderByIdResponse
     /**
      * @param mixed $image
      */
-    public function setImage(string $image): self
+    public function setImage($image): void
     {
         $this->image = $image;
-
-        return $this;
     }
 
-    public function getUser()
-    {
-        return $this->user;
-    }
-   /**
-     * @param mixed $user
-     */
-    public function setUser($user): self
-    {
-        $this->user = $user;
 
-        return $this;
-    }
-
-   /**
-     * @return mixed
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    /**
-     * @param mixed $project
-     */
-    public function setProject($project): void
-    {
-        $this->project = $project;
-
-    }
-    
     /**
      * @return mixed
      */ 
@@ -336,46 +282,6 @@ class GetOrderByIdResponse
     public function setLinkUX($linkUX)
     {
         $this->linkUX = $linkUX;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */ 
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     *  @param mixed $category
-     *
-     * 
-     */ 
-    public function setCategory(?Categories $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */ 
-    public function getIsFeaturedIdea()
-    {
-        return $this->isFeaturedIdea;
-    }
-
-    /**
-     * @param mixed $isFeaturedIdea
-     *
-     * 
-     */ 
-    public function setIsFeaturedIdea($isFeaturedIdea)
-    {
-        $this->isFeaturedIdea = $isFeaturedIdea;
 
         return $this;
     }

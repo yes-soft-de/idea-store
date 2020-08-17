@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Categories;
+use App\Entity\Project;
+use App\Entity\Images;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method Categories|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +50,31 @@ class CategoriesRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findCategoryByld($id): ?object
+    {
+        return  $res= $this->createQueryBuilder('Categories')
+            ->andWhere('Categories.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+               
+    }
+
+    // public function getAllCategoriesWithProject() 
+    // {
+    //     $res = $this->createQueryBuilder('Categories')
+    //     ->select('Categories.id','p.projectName')
+    
+        
+    //     ->leftJoin(
+    //         Project::class,          // Entity
+    //         'p',                       // Alias
+    //         Join::WITH,               // Join type
+    //        ' Categories.id = p.idCategories'  // Join columns
+    //         )
+    //     ->getQuery()
+    //     ->getResult();
+  
+    // return $res;
+    // }
 }

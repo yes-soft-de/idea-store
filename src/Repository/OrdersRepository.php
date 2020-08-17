@@ -8,6 +8,7 @@ use App\Entity\Images;
 use App\Entity\Orders;
 use App\Entity\Project;
 use App\Entity\User;
+use App\Entity\Categories;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -55,7 +56,7 @@ class OrdersRepository extends ServiceEntityRepository
     public function getAll()
     {
         $res = $this->createQueryBuilder('Orders')
-            ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName', 'u.email', 'u.phone', 'i.image')
+            ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName', 'u.email', 'u.phone','p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','u.email', 'u.phone', 'i.image','c.category')
             ->leftJoin(
                 User::class,            // Entity
                 'u',                   // Alias
@@ -74,6 +75,12 @@ class OrdersRepository extends ServiceEntityRepository
                 Join::WITH,             // Join type
                 'p.id = i.project'      // Join columns
             )
+            ->leftJoin(
+                Categories::class,          // Entity
+                'c',                       // Alias
+                Join::WITH,               // Join type
+               'p.idCategories = c.id'   // Join columns
+                )
             ->getQuery()
             ->getResult();
 
@@ -91,7 +98,8 @@ class OrdersRepository extends ServiceEntityRepository
     public function findOrderWithByld($id)
     {
         $res = $this->createQueryBuilder('Orders')
-            ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName', 'u.email', 'u.phone', 'i.image')
+            ->select('Orders.id', 'p.projectName', 'p.description', 'u.userName' ,
+            'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','u.email', 'u.phone', 'i.image','c.category')
             ->leftJoin(
                 User::class,             // Entity
                 'u',                     // Alias
@@ -110,6 +118,12 @@ class OrdersRepository extends ServiceEntityRepository
                 Join::WITH,          // Join type
                 'p.id = i.project'   // Join columns
             )
+            ->leftJoin(
+                Categories::class,          // Entity
+                'c',                       // Alias
+                Join::WITH,               // Join type
+               'p.idCategories = c.id'   // Join columns
+                )
             ->andWhere('Orders.id=:id')
             ->setParameter('id', $id)
             ->getQuery()

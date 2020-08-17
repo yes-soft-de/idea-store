@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Project;
 use App\Entity\Images;
+use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\Expr\Join;
@@ -67,13 +68,20 @@ class ProjectRepository extends ServiceEntityRepository
     {
 
         return $this->createQueryBuilder('p')
-            ->select('p.id', 'p.projectName', 'p.description', 'i.image')
+            ->select('p.id', 'p.projectName', 'p.description',
+                    'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX',            'i.image','c.category')
         
             ->leftJoin(
                 Images::class,     // Entity
                 'i',               // Alias
                 Join::WITH,        // Join type
                'p.id = i.project'  // Join columns
+                )
+            ->leftJoin(
+                Categories::class,          // Entity
+                'c',                       // Alias
+                Join::WITH,               // Join type
+               'p.idCategories = c.id'   // Join columns
                 )
             ->andWhere('p.id=:id')  
             ->setParameter('id', $id)
@@ -84,7 +92,8 @@ class ProjectRepository extends ServiceEntityRepository
     public function getAll()
     {
         $res = $this->createQueryBuilder('p')
-            ->addSelect('p.id','p.projectName','p.description','i.image')
+            ->addSelect('p.id','p.projectName','p.description',
+            'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','i.image','c.category')
         
             ->leftJoin(
             Images::class,           // Entity
@@ -92,6 +101,12 @@ class ProjectRepository extends ServiceEntityRepository
             Join::WITH,            // Join type
            'p.id = i.project'     // Join columns
             )
+            ->leftJoin(
+                Categories::class,          // Entity
+                'c',                       // Alias
+                Join::WITH,               // Join type
+               'p.idCategories = c.id'   // Join columns
+                )
             ->getQuery()
             ->getResult();
         return $res;

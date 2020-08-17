@@ -3,6 +3,7 @@ namespace App\Manager;
 
 use App\AutoMapping;
 use App\Entity\Project;
+use App\Entity\Categories;
 use App\Repository\ProjectRepository;
 use App\Request\CreateProjectRequest;
 use App\Request\DeleteRequest;
@@ -27,7 +28,14 @@ class ProjectManager
 
     public function create(CreateProjectRequest $request)
     {
-
+        if ($request->idCategories) {
+            
+            $category = $this->entityManager->getRepository(Categories::class)
+                ->find($request->idCategories);
+            $request->setIdCategories($category);
+        
+          
+        }
         $projectEntity = $this->autoMapping->map(CreateProjectRequest::class, Project::class, $request);
 
         $this->entityManager->persist($projectEntity);
@@ -74,5 +82,5 @@ class ProjectManager
             return $projectEntity;
         }
     }
-
+    
 }
