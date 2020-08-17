@@ -15,10 +15,7 @@ use App\Request\CreateImageRequest;
 use App\Request\GetByIdRequest;
 use App\Request\DeleteRequest;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
-<<<<<<< HEAD
-=======
 use App\Request\UpdateImageRequest;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 class ImageController extends BaseController
 {
     private $ImageService;
@@ -47,11 +44,7 @@ class ImageController extends BaseController
         
     }
     /**
-<<<<<<< HEAD
-     * @Route("/projects", name="getAllImages",methods={"GET"})
-=======
      * @Route("/images", name="getAllImages",methods={"GET"})
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      * @return JsonResponse
      */
     public function getAll()
@@ -61,11 +54,7 @@ class ImageController extends BaseController
     }
 
     /**
-<<<<<<< HEAD
-     * @Route("/project/{id}", name="getImageById",methods={"GET"})
-=======
      * @Route("/image/{id}", name="getImageById",methods={"GET"})
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      * @param Request $request
      * @return JsonResponse
      */
@@ -77,9 +66,6 @@ class ImageController extends BaseController
         return $this->response($result, self::FETCH);
     }
 
-<<<<<<< HEAD
-    
-=======
      /**
      * @Route("/image/{id}", name="updateImage",methods={"PUT"})
      * @param Request $request
@@ -94,7 +80,6 @@ class ImageController extends BaseController
         $result = $this->imageService->update($request);
         return $this->response($result, self::UPDATE);
     }
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 
    
 }

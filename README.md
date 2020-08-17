@@ -5,7 +5,7 @@
 
 #### Create Project
 ```
-  /project
+  /project/{idCategory}
   methods={"POST"}
 ```
   
@@ -54,8 +54,26 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
-
-
+#### create category
+```
+/category
+methods={"POST"}
+```
+#### update Category
+```
+category/{id}
+methods={"PUT"}
+```
+#### get All Categories
+```
+/categories
+methods={"GET"}
+```
+#### delete Category
+```
+/category/{id}
+methods={"DELETE"}
+```
 ## Security APIs Guide 
 
 #### Create new user
