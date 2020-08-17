@@ -32,7 +32,7 @@ class CategoriesController  extends BaseController
 
 
     /**
-     * @Route("/category", name="categories", methods={"POST"})
+     * @Route("/category", name="createCategories", methods={"POST"})
       * @param Request $request
      * @return Response
      */
@@ -90,7 +90,7 @@ class CategoriesController  extends BaseController
 
      
     /**
-     * @Route("/category/{id}", name="updateCategory",methods={"DELETE"})
+     * @Route("/category/{id}", name="deleteCategory",methods={"DELETE"})
      * @param Request $request
      * @return JsonResponse
      */
