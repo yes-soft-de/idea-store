@@ -74,6 +74,18 @@ methods={"GET"}
 /category/{id}
 methods={"DELETE"}
 ```
+#### get All Featured Ideas
+```
+/FeaturedIdeas
+methods={"GET"}
+
+```
+#### get All Categories With Project
+```
+/categoriesWithProject
+methods={"GET"}
+```
+
 ## Security APIs Guide 
 
 #### Create new user
