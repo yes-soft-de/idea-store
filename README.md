@@ -56,7 +56,6 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
-<<<<<<< HEAD
 ### Articles
 #### Create new article
 ```
