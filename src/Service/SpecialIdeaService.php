@@ -8,6 +8,7 @@ use App\AutoMapping;
 use App\Entity\SpecialIdea;
 use App\Manager\SpecialIdeaManager;
 use App\Respons\CreateSpecialIdeaResponse;
+use App\Respons\GetSpecialIdeaByIdResponse;
 use App\Respons\GetSpecialIdeaResponse;
 
 class SpecialIdeaService
@@ -21,11 +22,16 @@ class SpecialIdeaService
         $this->autoMapping = $autoMapping;
     }
 
-    public function create($request)
+    public function create($request, $idCategory)
     {
+        $request->setIdCategories($request->getIdCategories($idCategory));
+
         $specialIdeaResult = $this->specialIdeaManager->create($request);
+
+        $specialIdeaResult->getIdCategories($idCategory);
+
         $response = $this->autoMapping->map(SpecialIdea::class, CreateSpecialIdeaResponse::class, $specialIdeaResult);
-        //here we should set the category
+
         return $response;
     }
 
@@ -40,10 +46,19 @@ class SpecialIdeaService
         return $response;
     }
 
-    public function getById()
-    {}
+    public function getById($request)
+    {
+        $result = $this->specialIdeaManager->getById($request);
+        $response = $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class, $result);
+        return $response;
+    }
 
-    public function delete()
-    {}
+    public function delete($request)
+    {
+        $specialIdeaResult = $this->specialIdeaManager->delete($request);
+        $response = $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class,
+            $specialIdeaResult);
+        return $response;
+    }
 
 }

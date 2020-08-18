@@ -29,9 +29,12 @@ class ProjectService
         $this->imageManager = $imageManager;
     }
 
-    public function create($request)
+    public function create($request, $idCategory)
     {
+        $request->setIdCategories($request->getIdCategories($idCategory));
+
         $projectResult = $this->projectManager->create($request);
+        $projectResult->getIdCategories($idCategory);
 
         $response = $this->autoMapping->map(Project::class, CreateProjectResponse::class,
             $projectResult);
@@ -87,5 +90,5 @@ class ProjectService
         $response->setImage($request->getImage());
         return $response;
     }
-
+   
 }

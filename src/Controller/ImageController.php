@@ -44,11 +44,7 @@ class ImageController extends BaseController
         
     }
     /**
-<<<<<<< HEAD
-     * @Route("/projects", name="getAllImages",methods={"GET"})
-=======
      * @Route("/images", name="getAllImages",methods={"GET"})
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
      * @return JsonResponse
      */
     public function getAll()

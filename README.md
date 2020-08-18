@@ -6,7 +6,7 @@
 ### Projects
 #### Create Project
 ```
-  /project
+  /project/{idCategory}
   methods={"POST"}
 ```
   
@@ -56,6 +56,7 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
+<<<<<<< HEAD
 ### Articles
 #### Create new article
 ```
@@ -81,6 +82,50 @@ method={"GET"}
 ```
 /articles/{id}
 method={"DELETE"}
+```
+
+### Categories
+#### create category
+```
+/category
+methods={"POST"}
+```
+#### update Category
+```
+category/{id}
+methods={"PUT"}
+```
+#### get All Categories
+```
+/categories
+methods={"GET"}
+```
+#### delete Category
+```
+/category/{id}
+methods={"DELETE"}
+>>>>>>> caa2937a493a5d4d7485931b44580a109acaee21
+```
+### Special Ideas
+#### Create special idea
+```
+/special-idea/{idCategory}
+methods={"POST"}
+```
+#### Get all special ideas
+```
+/special-idea
+methods={"GET"}
+```
+#### Get a special idea
+```
+/special-idea/{id}
+methods={"GET"}
+```
+#### Delete existing special idea
+```
+/special-idea/{id}
+methods={"DELETE"}
 ```
 ## Security APIs Guide 
 

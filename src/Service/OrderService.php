@@ -53,7 +53,7 @@ class OrderService
         foreach ($result as $row) {
             $response[] = $this->autoMapping->map('array', GetOrderByIdResponse::class, $row);
         }
-        // $response = $this->autoMapping->map(Orders::class, GetOrderByIdResponse::class, $result);
+   
         return $response;
     }
 

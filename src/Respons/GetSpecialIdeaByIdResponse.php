@@ -1,15 +1,16 @@
 <?php
 
 
-namespace App\Request;
+namespace App\Respons;
 
-class CreateSpecialIdeaRequest
+
+class GetSpecialIdeaByIdResponse
 {
-    public $id;
-    public $ideaNew;
-    public $description;
-    public $similarIdealink;
-    public $idCategories;
+    private $id;
+    private $ideaNew;
+    private $description;
+    private $similarIdealink;
+    private $idCategories;
 
     /**
      * @return mixed
@@ -19,11 +20,12 @@ class CreateSpecialIdeaRequest
         return $this->id;
     }
 
-    public function setId($id): self
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -34,11 +36,12 @@ class CreateSpecialIdeaRequest
         return $this->ideaNew;
     }
 
-    public function setIdeaNew(string $ideaNew): self
+    /**
+     * @param mixed $ideaNew
+     */
+    public function setIdeaNew($ideaNew): void
     {
         $this->ideaNew = $ideaNew;
-
-        return $this;
     }
 
     /**
@@ -49,11 +52,12 @@ class CreateSpecialIdeaRequest
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -64,11 +68,12 @@ class CreateSpecialIdeaRequest
         return $this->similarIdealink;
     }
 
-    public function setSimilarIdealink(string $similarIdealink): self
+    /**
+     * @param mixed $similarIdealink
+     */
+    public function setSimilarIdealink($similarIdealink): void
     {
         $this->similarIdealink = $similarIdealink;
-
-        return $this;
     }
 
     /**
@@ -79,8 +84,13 @@ class CreateSpecialIdeaRequest
         return $this->idCategories;
     }
 
+    /**
+     * @param mixed $idCategories
+     */
     public function setIdCategories($idCategories): void
     {
         $this->idCategories = $idCategories;
     }
+
+
 }

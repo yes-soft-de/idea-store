@@ -10,6 +10,7 @@ class CreateArticleRequest
     private $articleTitle;
     private $article;
     private $date;
+    private $idCategory;
 
     /**
      * @return mixed
@@ -74,6 +75,23 @@ class CreateArticleRequest
     {
         $this->date = $date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdCategory()
+    {
+        return $this->idCategory;
+    }
+
+    /**
+     * @param mixed $idCategory
+     */
+    public function setIdCategory($idCategory): void
+    {
+        $this->idCategory = $idCategory;
+    }
+
 
 
 }
