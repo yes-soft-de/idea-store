@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\AutoMapping;
 use App\Entity\Categories;
+use App\Entity\Project;
 use App\Manager\CategoriesManager;
 use App\Respons\CreateCategoryResponse;
 use App\Respons\GetCategoryResponse;
@@ -79,13 +80,14 @@ class CategoriesService
         return $response;
     }
    
-    // public function getAllCategoriesWithProjectService()
-    // {
-    //     $result = $this->categoryManager->getAllCategoriesWithProject();
-    //     $response=[];
-    //     foreach ($result as $row)
-    //         $response[] = $this->autoMapping->map(Categories::class, GetCategoryResponseWithProject::class, $row);
-            
-    //     return $response;
-    // }
+    public function getAllCategoriesWithProjectService()
+    {
+        $result = $this->categoryManager->getAllCategoriesWithProject();
+       
+        $response=[];
+        foreach ($result as $row)
+            $response[] = $this->autoMapping->map('array'::class, GetCategoryResponseWithProject::class, $row);
+        return $response;
+
+    }
 }

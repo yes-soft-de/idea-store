@@ -96,6 +96,28 @@ class ProjectRepository extends ServiceEntityRepository
             'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','i.image','c.category')
         
             ->leftJoin(
+                Images::class,           // Entity
+                'i',                    // Alias
+                Join::WITH,            // Join type
+                'p.id = i.project'     // Join columns
+                )
+            ->leftJoin(
+                Categories::class,          // Entity
+                'c',                       // Alias
+                Join::WITH,               // Join type
+               'p.idCategories = c.id'   // Join columns
+                )
+            ->getQuery()
+            ->getResult();
+        return $res;
+    }
+    public function getAllFeaturedIdeas()
+    {
+        $res = $this->createQueryBuilder('p')
+            ->addSelect('p.id','p.projectName','p.description',
+            'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','i.image','c.category')
+        
+            ->leftJoin(
             Images::class,           // Entity
             'i',                    // Alias
             Join::WITH,            // Join type
@@ -107,9 +129,9 @@ class ProjectRepository extends ServiceEntityRepository
                 Join::WITH,               // Join type
                'p.idCategories = c.id'   // Join columns
                 )
+            ->andWhere('p.isFeaturedIdea=1')  
             ->getQuery()
             ->getResult();
         return $res;
     }
-  
 }

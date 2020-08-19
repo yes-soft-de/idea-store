@@ -9,7 +9,6 @@ class GetCategoryResponseWithProject
     public $category;
     public $description;
     public $projectName;
-    public $descriptionPro;
     public $image;
     public $ideaCode;
     public $DurationOfImplementation;
@@ -68,23 +67,6 @@ class GetCategoryResponseWithProject
     private function setProjectName(string $projectName): self
     {
         $this->projectName = $projectName;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getDescriptionPro(): ?string
-    {
-        return $this->descriptionPro;
-    }
-    /**
-     * @param mixed $descriptionPro
-     */
-    private function setDescriptionPro(?string $descriptionPro): self
-    {
-        $this->descriptionPro = $descriptionPro;
 
         return $this;
     }

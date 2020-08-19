@@ -59,22 +59,26 @@ class CategoriesRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
                
     }
-
-    // public function getAllCategoriesWithProject() 
-    // {
-    //     $res = $this->createQueryBuilder('Categories')
-    //     ->select('Categories.id','p.projectName')
-    
-        
-    //     ->leftJoin(
-    //         Project::class,          // Entity
-    //         'p',                       // Alias
-    //         Join::WITH,               // Join type
-    //        ' Categories.id = p.idCategories'  // Join columns
-    //         )
-    //     ->getQuery()
-    //     ->getResult();
-  
-    // return $res;
-    // }
+   
+    public function getAllCategoriesWithProject()
+    {
+        $res = $this->createQueryBuilder('Categories')
+            ->addSelect('p.projectName','p.description',
+            'p.ideaCode','p.DurationOfImplementation','p.costImplementation','p.initialUserExperienceStudy','p.notes','p.similarSites','p.ageGroup','p.country','p.platforms','p.linkUX','i.image','Categories.category')
+            ->join(
+                Project::class,                      // Entity
+                'p',                                // Alias
+                Join::WITH,                        // Join type
+               'p.idCategories = Categories.id'   // Join columns
+                )
+            ->leftJoin(
+                Images::class,         // Entity
+                'i',                  // Alias
+                Join::WITH,          // Join type
+                'p.id = i.project'  // Join columns
+                )
+            ->getQuery()
+            ->getResult();
+        return $res;
+    }
 }

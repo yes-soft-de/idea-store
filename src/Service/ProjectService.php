@@ -90,5 +90,14 @@ class ProjectService
         $response->setImage($request->getImage());
         return $response;
     }
-   
+    public function getAllFeaturedIdeas()
+    {
+        $result = $this->projectManager->getAllFeaturedIdeas();
+        $response = [];
+        foreach ($result as $row) {
+            $response[] = $this->autoMapping->map('array'::class, GetProjectsResponse::class, $row);
+        }
+
+        return $response;
+    }
 }
