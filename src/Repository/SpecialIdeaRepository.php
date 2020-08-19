@@ -47,4 +47,20 @@ class SpecialIdeaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getAll()
+    {
+        return $res = $this->createQueryBuilder('specialIdea')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getSpecialIdeaById($id): ?SpecialIdea
+    {
+        return $res = $this->createQueryBuilder('specialIdea')
+        ->andWhere('specialIdea.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
 }

@@ -47,4 +47,24 @@ class ArticlesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getAll()
+    {
+        $res = $this->createQueryBuilder('article')
+            ->getQuery()
+            ->getResult();
+
+        return $res;
+    }
+
+    public function getArticleById($id): ?Articles
+    {
+        $res = $this->createQueryBuilder('article')
+            ->andWhere('article.id=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $res;
+    }
 }
