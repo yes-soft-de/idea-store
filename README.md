@@ -137,6 +137,27 @@ methods={"GET"}
 /categoriesWithProject
 methods={"GET"}
 ```
+### Messages
+#### Create a new message for specific user
+```
+/messages/{idUser}
+method={"POST"}
+```
+#### Get a specific message by ID
+```
+/messages/{id}
+method={"GET"}
+```
+#### Get all messages
+```
+/messages
+method={"GET"}
+```
+#### Delete a specific message by ID
+```
+/messages/{id}
+method={"DELETE"}
+```
 
 ## Security APIs Guide 
 
