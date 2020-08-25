@@ -137,7 +137,7 @@ methods={"GET"}
 /categoriesWithProject
 methods={"GET"}
 ```
-
+### Comments
 #### Create new comment
 ```
 /comment/{idArtical}
