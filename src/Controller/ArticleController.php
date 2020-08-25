@@ -33,6 +33,7 @@ class ArticleController extends BaseController
      */
     public function create(Request $request)
     {
+        
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateArticleRequest::class, (object)$data);
@@ -91,5 +92,17 @@ class ArticleController extends BaseController
         $request = new DeleteRequest($request->get('id'));
         $result = $this->articleService->delete($request);
         return $this->response("",self::DELETE);
+    }
+
+    /**
+     * @Route("/articleWithComment/{id}", name="getArticleWithComment", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getArticleWithComment(Request $request)
+    {
+        $request = new GetByIdRequest($request->get('id'));
+        $result = $this->articleService->getArticleWithComment($request);
+        return $this->response($result, self::FETCH);
     }
 }

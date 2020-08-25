@@ -11,6 +11,7 @@ use App\Respons\CreateArticleResponse;
 use App\Respons\GetArticleByIdResponse;
 use App\Respons\GetArticleResponse;
 use App\Respons\UpdateArticleResponse;
+use App\Respons\GetArticleByIdWithCommentResponse;
 
 class ArticleService
 {
@@ -61,5 +62,17 @@ class ArticleService
         $articleResult = $this->articleManager->delete($request);
         $response = $this->autoMapping->map(Articles::class, GetArticleByIdResponse::class, $articleResult);
         return $response;
+    }
+
+    public function getArticleWithComment($request)
+    {
+        $result = $this->articleManager->getArticleWithComment($request);
+        $response=[];
+        foreach ($result as $row)
+        {
+        $response[] = $this->autoMapping->map('array'::class, GetArticleByIdWithCommentResponse::class, $row);
+        }
+        return $response;
+        
     }
 }
