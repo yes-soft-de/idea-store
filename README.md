@@ -138,6 +138,32 @@ methods={"GET"}
 methods={"GET"}
 ```
 
+#### Create new comment
+```
+/comment/{idArtical}
+methods={"POST"}
+```
+#### Update  comment
+```
+/comment/{id}/{idArtical}
+methods={"PUT"}
+```
+#### Delete Comment
+```
+/comment/{id}
+methods={"DELETE"}
+```
+#### get Comment By Id
+```
+/comment/{id}
+methods={"GET"}
+```
+#### get All comments For Article
+```
+/comments/{idArticle}
+methods={"GET"}
+```
+
 ## Security APIs Guide 
 
 #### Create new user
