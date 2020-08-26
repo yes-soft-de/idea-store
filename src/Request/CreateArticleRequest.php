@@ -4,6 +4,8 @@
 namespace App\Request;
 
 
+use DateTime;
+
 class CreateArticleRequest
 {
     private $id;
@@ -11,6 +13,15 @@ class CreateArticleRequest
     private $article;
     private $date;
     private $idCategory;
+
+    /**
+     * CreateArticleRequest constructor.
+     */
+    public function __construct()
+    {
+        $this->date = new DateTime('Now');
+    }
+
 
     /**
      * @return mixed
@@ -63,7 +74,7 @@ class CreateArticleRequest
     /**
      * @return mixed
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
         return $this->date;
     }
@@ -71,7 +82,7 @@ class CreateArticleRequest
     /**
      * @param mixed $date
      */
-    public function setDate($date): void
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }

@@ -30,7 +30,7 @@ class ArticleManager
     public function create(CreateArticleRequest $request)
     {
         $articleEntity = $this->autoMapping->map(CreateArticleRequest::class, Articles::class, $request);
-
+        $articleEntity->setDate();
         $this->entityManager->persist($articleEntity);
         $this->entityManager->flush();
         $this->entityManager->clear();

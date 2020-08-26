@@ -27,6 +27,7 @@ class UserManager
     public function create(CreateUserRequest $createUserRequest)
     {
         $userEntity = $this->autoMapping->map(CreateUserRequest::class, User::class, $createUserRequest);
+        $userEntity->setCreatedTime();
         $this->entityManager->persist($userEntity);
         $this->entityManager->flush();
         $this->entityManager->clear();

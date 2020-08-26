@@ -65,7 +65,7 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->createdTime = new \DateTime('now');
+        //$this->createdTime = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -165,14 +165,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedTime(): ?\DateTimeInterface
+    public function getCreatedTime()
     {
         return $this->createdTime;
     }
 
-    public function setCreatedTime(\DateTimeInterface $createdTime): self
+    public function setCreatedTime(): self
     {
-        $this->createdTime = new \DateTime('now');
+        $this->createdTime = new \DateTime('Now');
         return $this;
     }
 }

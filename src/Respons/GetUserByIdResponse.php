@@ -6,11 +6,29 @@ namespace App\Respons;
 
 class GetUserByIdResponse
 {
+    public $id;
     private $email;
     private $roles;
     private $userName;
     private $phone;
     private $createdTime;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * @return mixed

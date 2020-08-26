@@ -4,6 +4,8 @@
 namespace App\Request;
 
 
+use DateTime;
+
 class CreateUserRequest
 {
     private $id;
@@ -13,6 +15,13 @@ class CreateUserRequest
     private $userName;
     private $phone;
     private $createdTime;
+
+
+    public function __construct()
+    {
+        $this->createdTime = new DateTime('Now');
+    }
+
 
     /**
      * @return mixed
@@ -113,7 +122,7 @@ class CreateUserRequest
     /**
      * @return mixed
      */
-    public function getCreatedTime()
+    public function getCreatedTime(): DateTime
     {
         return $this->createdTime;
     }
@@ -121,9 +130,9 @@ class CreateUserRequest
     /**
      * @param mixed $createdTime
      */
-    public function setCreatedTime($createdTime): void
+    public function setCreatedTime(DateTime $createdTime): void
     {
-        $this->createdTime = new \DateTime('now');
+        $this->createdTime = $createdTime;
     }
 
 
