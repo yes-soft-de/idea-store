@@ -70,7 +70,8 @@ class ArticleManager
         $article = $this->articleRepository->getArticleById($request->getId());
         if(!$article)
         {
-
+            return null;
+            // return new Response(['data'=>'The project was not found!']);
         }
         else
         {

@@ -59,6 +59,10 @@ class ArticleService
     public function delete($request)
     {
         $articleResult = $this->articleManager->delete($request);
+        if($articleResult==null)
+        {
+            return null;
+        }
         $response = $this->autoMapping->map(Articles::class, GetArticleByIdResponse::class, $articleResult);
         return $response;
     }

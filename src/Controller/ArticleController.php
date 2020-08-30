@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service_locator;
 
 class ArticleController extends BaseController
 {
@@ -90,6 +91,10 @@ class ArticleController extends BaseController
     {
         $request = new DeleteRequest($request->get('id'));
         $result = $this->articleService->delete($request);
+        if($result==null)
+        {
+            return $this->respondNotFound();
+        }
         return $this->response("",self::DELETE);
     }
 }

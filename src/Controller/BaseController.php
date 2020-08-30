@@ -15,6 +15,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 class BaseController extends AbstractController
 {
     private $serializer;
+    private $statusCode;
+
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
@@ -24,6 +26,24 @@ class BaseController extends AbstractController
     const UPDATE=["updated","204"];
     const DELETE=["deleted","401"];
     const FETCH=["fetched","200"];
+    //const NOTFOUND=["Not found", "404"];
+
+    /**
+     * @return mixed
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
+
+    /**
+     * @param mixed $statusCode
+     */
+    public function setStatusCode($statusCode): void
+    {
+        $this->statusCode = $statusCode;
+    }
+
 
     /**
      * Returns a JSON response
@@ -63,9 +83,23 @@ class BaseController extends AbstractController
      */
     public function respondUnauthorized($message = 'Not authorized!')
     {
-        return $this->setStatusCode(401)->respondWithErrors($message);
+        $this->setStatusCode(401)->respondWithErrors($message);
     }
 
+    /**
+     * @param string $message
+     * @return JsonResponse
+     */
+    public function respondNotFound($message = 'Not found!')
+    {
+        $data = [
+            'Error' => $message,
+        ];
+
+        $this->setStatusCode(404);
+
+        return new JsonResponse($data, $this->getStatusCode());
+    }
     public function response($result, $status) :jsonResponse
     {
         $encoders = [ new JsonEncoder()];
