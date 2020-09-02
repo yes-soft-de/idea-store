@@ -91,10 +91,6 @@ class ArticleController extends BaseController
     {
         $request = new DeleteRequest($request->get('id'));
         $result = $this->articleService->delete($request);
-        if($result==null)
-        {
-            return $this->respondNotFound();
-        }
         return $this->response("",self::DELETE);
     }
 }
