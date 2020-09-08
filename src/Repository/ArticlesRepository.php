@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Articles;
+use Doctrine\ORM\Query\Expr\Join;
+use App\Entity\Comments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -64,6 +66,23 @@ class ArticlesRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $res;
+    }
+    public function getArticleWithComment($id): array
+    {
+        $res = $this->createQueryBuilder('article')
+            ->addSelect('article.id','article.article','article.articleTitle','article.date','c.comment')
+            ->leftJoin(
+                 Comments::class,         // Entity
+                 'c',                    // Alias
+                 Join::WITH,            // Join type
+                 'c.artical = article.id'     // Join columns
+                 )
+            ->andWhere('article.id=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
 
         return $res;
     }

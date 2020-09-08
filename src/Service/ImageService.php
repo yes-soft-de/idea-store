@@ -51,7 +51,10 @@ class ImageService
     public function getImageById($request)
     {
         $result = $this->imageManager->getImageById($request);
-        $response = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
+        $response=[];
+        foreach ($result as $row)
+        $response[] = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $row);
+    
         return $response;
     }
 

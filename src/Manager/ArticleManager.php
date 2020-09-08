@@ -56,7 +56,6 @@ class ArticleManager
     public function getAll()
     {
         $data = $this->articleRepository->getAll();
-
         return $data;
     }
 
@@ -65,6 +64,7 @@ class ArticleManager
         return $result = $this->articleRepository->getArticleById($request->getId());
     }
 
+    
     public function delete(DeleteRequest $request)
     {
         $article = $this->articleRepository->getArticleById($request->getId());
@@ -78,5 +78,10 @@ class ArticleManager
             $this->entityManager->flush();
         }
         return $article;
+    }
+
+    public function getArticleWithComment(GetByIdRequest $request)
+    {
+        return $result = $this->articleRepository->getArticleWithComment($request->getId());
     }
 }
