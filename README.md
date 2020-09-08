@@ -3,9 +3,10 @@
 
 ## API guide 
 
+### Projects
 #### Create Project
 ```
-  /project
+  /project/{idCategory}
   methods={"POST"}
 ```
   
@@ -29,6 +30,7 @@ methods={"DELETE"}
 /project/{id}
 methods={"PUT"}
 ```
+### Orders
 #### Create Order
 ```
   /order/{idProject}/{idUser}
@@ -54,7 +56,113 @@ methods={"DELETE"}
 /order/{id}/{idProject}/{idUser}
 methods={"PUT"}
 ```
+### Articles
+#### Create new article
+```
+/articles
+method={"POST"}
+```
+#### Update existing article
+```
+/articles/{id}
+method={"PUT"}
+```
+#### Get an article by ID
+```
+/articles/{id}
+method={"GET"}
+```
+#### Get all articles
+```
+/articles
+method={"GET"}
+```
+#### Delete existing article
+```
+/articles/{id}
+method={"DELETE"}
+```
 
+### Categories
+#### create category
+```
+/category
+methods={"POST"}
+```
+#### update Category
+```
+category/{id}
+methods={"PUT"}
+```
+#### get All Categories
+```
+/categories
+methods={"GET"}
+```
+#### delete Category
+```
+/category/{id}
+methods={"DELETE"}
+>>>>>>> caa2937a493a5d4d7485931b44580a109acaee21
+```
+### Special Ideas
+#### Create special idea
+```
+/special-idea/{idCategory}
+methods={"POST"}
+```
+#### Get all special ideas
+```
+/special-idea
+methods={"GET"}
+```
+#### Get a special idea
+```
+/special-idea/{id}
+methods={"GET"}
+```
+#### Delete existing special idea
+```
+/special-idea/{id}
+methods={"DELETE"}
+```
+#### get All Featured Ideas
+```
+/FeaturedIdeas
+methods={"GET"}
+
+```
+#### get All Categories With Project
+```
+/categoriesWithProject
+methods={"GET"}
+```
+### Comments
+#### Create new comment
+```
+/comment/{idArtical}
+methods={"POST"}
+```
+#### Update  comment
+```
+/comment/{id}/{idArtical}
+methods={"PUT"}
+```
+#### Delete Comment
+```
+/comment/{id}
+methods={"DELETE"}
+```
+#### get Comment By Id
+```
+/comment/{id}
+methods={"GET"}
+```
+#### get All comments For Article
+```
+/comments/{idArticle}
+methods={"GET"}
+```
 
 ## Security APIs Guide 
 

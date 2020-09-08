@@ -28,17 +28,17 @@ class ProjectController extends BaseController
     }
 
     /**
-     * @Route("/project", name="createProject",methods={"POST"})
+     * @Route("/project/{idCategory}", name="createProject",methods={"POST"})
      * @param Request $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create(Request $request, $idCategory)
     {
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateProjectRequest::class, (object) $data);
-
-        $result = $this->projectService->create($request);
+        $request->setIdCategories($idCategory);
+        $result = $this->projectService->create($request, $idCategory);
 
         return $this->response($result, self::CREATE);
 
@@ -90,14 +90,20 @@ class ProjectController extends BaseController
         $id = $request->get('id');
         $request = $this->autoMapping->map(\stdClass::class, UpdateProjectRequest::class, (object) $data);
         $request->setId($id);
-<<<<<<< HEAD
-=======
 
         $request->setImage($request->getImage('image'));
         
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
         $result = $this->projectService->update($request);
         return $this->response($result, self::UPDATE);
     }
-
+   /**
+     * @Route("/FeaturedIdeas", name="getAllFeaturedIdeas",methods={"GET"})
+     * @return JsonResponse
+     */
+    public function getAllFeaturedIdeas()
+    {
+        $result = $this->projectService->getAllFeaturedIdeas();
+        return $this->response($result, self::FETCH);
+    }
+  
 }

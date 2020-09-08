@@ -49,13 +49,14 @@ class ImagesRepository extends ServiceEntityRepository
     */
     
   
-    public function findImageByld($id): ?object
+    public function findImageByld($id)
     {
         return  $res= $this->createQueryBuilder('Images')
             ->andWhere('Images.project = :id')
             ->setParameter('id', $id)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
+       //     ->getOneOrNullResult();
                
     }
     public function getAll()

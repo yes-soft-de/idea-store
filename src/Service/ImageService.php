@@ -12,10 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Respons\GetImagesResponse;
 use App\Respons\GetImageByIdResponse;
 use App\Response\DeleteResponse;
-<<<<<<< HEAD
-=======
 use App\Respons\UpdateImageResponse;
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
 use Symfony\Component\Routing\Exception\NoConfigurationException;
 use Doctrine\ORM\NonUniqueResultException;
 
@@ -54,20 +51,18 @@ class ImageService
     public function getImageById($request)
     {
         $result = $this->imageManager->getImageById($request);
-        $response = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
+        $response=[];
+        foreach ($result as $row)
+        $response[] = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $row);
+    
         return $response;
     }
 
 
     public function delete($request)
     {
-<<<<<<< HEAD
-        $result = $this->projectManager->delete($request);
-        $response = $this->autoMapping->map(Project::class, GetProjectByIdResponse::class, $result);
-=======
         $result = $this->imageManager->delete($request);
         $response = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
         //$error=[];
         if(!$response){
            $error=['error'=>"this project not found!!!"];
@@ -80,9 +75,6 @@ class ImageService
         // return $response;
           
     }
-<<<<<<< HEAD
-
-=======
     public function update($request)
     {
         $imageResult = $this->imageManager->update($request);
@@ -90,7 +82,6 @@ class ImageService
         $response->setImage($request->getImage());
         return $response;
     }
->>>>>>> f055343e76a9fc4dd5ec6b0304d34424e8f48e44
    
 
 }

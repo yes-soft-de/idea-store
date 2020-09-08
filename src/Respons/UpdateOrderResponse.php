@@ -17,6 +17,15 @@ class UpdateOrderResponse
         return $this->id;
     }
     /**
+     * @param mixed $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    /**
      * @return mixed
      */
     public function getUser()
