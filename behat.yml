@@ -1,0 +1,11 @@
+default:
+  suites:
+    query:
+      paths:
+        - "%paths.base%/features/get-all-users.feature"
+      contexts: [FeatureContext]
+
+    create:
+      paths:
+        - "%paths.base%/features/create-category.feature"
+      contexts: [CreateContext]
