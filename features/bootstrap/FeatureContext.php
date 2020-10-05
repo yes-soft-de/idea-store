@@ -23,4 +23,5 @@ class FeatureContext implements Context
 
     use QueriesCommon;
     use QueriesAllUsers;
+    use QueryUser;
 }

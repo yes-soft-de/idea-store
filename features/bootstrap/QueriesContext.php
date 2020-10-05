@@ -12,6 +12,7 @@ class QueriesContext implements Context
     public function __construct()
     {}
 
-    use QueriesCommon;
-    use QueriesAllUsers;
+//    use QueriesCommon;
+//    use QueriesAllUsers;
+//    use QueryUser;
 }

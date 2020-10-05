@@ -2,7 +2,7 @@ default:
   suites:
     query:
       paths:
-        - "%paths.base%/features/get-all-users.feature"
+        - "%paths.base%/features/query"
       contexts: [FeatureContext]
 
     create:

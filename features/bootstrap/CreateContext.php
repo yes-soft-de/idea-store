@@ -1,9 +1,5 @@
 <?php
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-use GuzzleHttp\Psr7\Request;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Defines application features from the specific context.

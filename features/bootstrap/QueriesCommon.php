@@ -16,8 +16,6 @@ trait QueriesCommon
      */
     public $client;
 
-    //use QueriesAllUsers;
-
     public function __construct()
     {
     }
