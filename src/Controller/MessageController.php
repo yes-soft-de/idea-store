@@ -13,20 +13,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MessageController extends BaseController
 {
     private $messageService;
     private $autoMapping;
-    //private $user;
+    private $validator;
 
-    /**
-     * MessageController constructor.
-     * @param MessageService $messageService
-     * @param AutoMapping $autoMapping
-     */
-    public function __construct(MessageService $messageService, AutoMapping $autoMapping)
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer,
+                                MessageService $messageService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
+        $this->validator = $validator;
         $this->messageService = $messageService;
         $this->autoMapping = $autoMapping;
     }
@@ -34,6 +34,7 @@ class MessageController extends BaseController
     /**
      * @Route("/messages/{idUser}", name="createMessage", methods={"POST"})
      * @param Request $request
+     * @param $idUser
      * @return Response
      */
     public function create(Request $request, $idUser)
@@ -42,6 +43,16 @@ class MessageController extends BaseController
 
         $request = $this->autoMapping->map(\stdClass::class, CreateMessageRequest::class, (object)$data);
         $request->setUser($idUser);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
+
         $result = $this->messageService->create($request, $idUser);
 
         return $this->response($result, self::CREATE);

@@ -9,17 +9,23 @@ use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends BaseController
 {
     private $userService;
     private $autoMapping;
+    private $validator;
 
-    public function __construct(UserService $userService, AutoMapping $autoMapping)
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer, UserService $userService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
         $this->userService = $userService;
         $this->autoMapping = $autoMapping;
+        $this->validator = $validator;
     }
 
     /**
@@ -32,6 +38,15 @@ class UserController extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateUserRequest::class, (object)$data);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $result = $this->userService->create($request);
 

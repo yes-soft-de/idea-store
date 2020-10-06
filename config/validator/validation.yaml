@@ -1,0 +1,91 @@
+App\Request\CreateArticleRequest:
+  properties:
+    articleTitle:
+      - NotBlank: ~
+    article:
+      - NotBlank: ~
+    idCategory:
+      - NotBlank: ~
+
+App\Request\CreateUserRequest:
+  properties:
+    email:
+      - NotBlank: ~
+    roles:
+      - NotBlank: ~
+    password:
+      - NotBlank: ~
+    userName:
+      - NotBlank: ~
+    phone:
+      - NotBlank: ~
+
+App\Request\CreateCategoryRequest:
+  properties:
+    category:
+      - NotBlank: ~
+    description:
+      - NotBlank: ~
+
+App\Request\CreateimageRequest:
+  properties:
+    image:
+      - NotBlank: ~
+    project:
+      - NotBlank: ~
+
+App\Request\CreateMessageRequest:
+  properties:
+    subject:
+      - NotBlank: ~
+    user:
+      - NotBlank: ~
+    date:
+      - NotBlank: ~
+
+App\Request\CreateOrderRequest:
+  properties:
+    user:
+      - NotBlank: ~
+    project:
+      - NotBlank: ~
+
+App\Request\CreateProjectRequest:
+  properties:
+    projectName:
+        - NotBlank: ~
+    description:
+        - NotBlank: ~
+    image:
+        - NotBlank: ~
+    ideaCode:
+        - NotBlank: ~
+    DurationOfImplementation:
+        - NotBlank: ~
+    costImplementation:
+        - NotBlank: ~
+    initialUserExperienceStudy:
+        - NotBlank: ~
+    notes:
+        - NotBlank: ~
+    ageGroup:
+        - NotBlank: ~
+    country:
+        - NotBlank: ~
+    platforms:
+        - NotBlank: ~
+    linkUX:
+        - NotBlank: ~
+    idCategories:
+        - NotBlank: ~
+    isFeaturedIdea:
+        - NotBlank: ~
+
+App\Request\CreateSpecialIdeaRequest:
+  properties:
+    ideaNew:
+      - NotBlank: ~
+    description:
+      - NotBlank: ~
+    idCategories:
+      - NotBlank: ~

@@ -12,16 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Request\GetByIdRequest;
 use App\Request\DeleteRequest;
 use App\Request\UpdateOrderRequest;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class OrderController extends BaseController
 {
     private $orderService;
     private $autoMapping;
-    /**
-     * OrderController constructor.
-     * @param OrderService $orderService
-     */
-    public function __construct(OrderService $orderService, AutoMapping $autoMapping)
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer,
+                                OrderService $orderService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
+        $this->validator = $validator;
         $this->orderService = $orderService;
         $this->autoMapping = $autoMapping;
     }
@@ -29,14 +33,27 @@ class OrderController extends BaseController
     /**
      * @Route("/order/{idProject}/{idUser}", name="createOrder",methods={"POST"})
      * @param Request $request
+     * @param $idProject
+     * @param $idUser
      * @return Response
      */
     public function create(Request $request, $idProject, $idUser)
     {
         $data = json_decode($request, true);
+
         $request = $this->autoMapping->map(\stdClass::class, CreateOrderRequest::class, (object) $data);
+
         $request->setProject($idProject);
         $request->setUser($idUser);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
          
         $result = $this->orderService->create($request, $idProject, $idUser);
        
@@ -75,7 +92,6 @@ class OrderController extends BaseController
         $request = new DeleteRequest($request->get('id'));
         $result = $this->orderService->delete($request);
         return $this->response(" ", self::DELETE);
-
     }
 
     /**

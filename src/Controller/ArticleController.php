@@ -14,17 +14,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service_locator;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ArticleController extends BaseController
 {
     private $articleService;
     private $autoMapping;
+    private $validator;
 
-    public function __construct(ArticleService $articleService, AutoMapping $autoMapping)
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer, ArticleService $articleService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
         $this->articleService = $articleService;
         $this->autoMapping = $autoMapping;
+        $this->validator = $validator;
     }
 
     /**
@@ -37,6 +41,15 @@ class ArticleController extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateArticleRequest::class, (object)$data);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $result = $this->articleService->create($request);
 

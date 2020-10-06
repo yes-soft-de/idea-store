@@ -12,17 +12,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ProjectController extends BaseController
 {
-    private $ProjectService;
+    private $projectService;
     private $autoMapping;
-    /**
-     * ProjectController constructor.
-     * @param ProjectService $projectService
-     */
-    public function __construct(ProjectService $projectService, AutoMapping $autoMapping)
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer,
+                                ProjectService $projectService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
+        $this->validator = $validator;
         $this->projectService = $projectService;
         $this->autoMapping = $autoMapping;
     }
@@ -30,6 +33,7 @@ class ProjectController extends BaseController
     /**
      * @Route("/project/{idCategory}", name="createProject",methods={"POST"})
      * @param Request $request
+     * @param $idCategory
      * @return Response
      */
     public function create(Request $request, $idCategory)
@@ -37,12 +41,23 @@ class ProjectController extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateProjectRequest::class, (object) $data);
+
         $request->setIdCategories($idCategory);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
+
         $result = $this->projectService->create($request, $idCategory);
 
         return $this->response($result, self::CREATE);
-
     }
+
     /**
      * @Route("/projects", name="getAllProjects",methods={"GET"})
      * @return JsonResponse
@@ -76,7 +91,6 @@ class ProjectController extends BaseController
         $result = $this->projectService->delete($request);
 
         return $this->response(" ", self::DELETE);
-
     }
 
     /**
@@ -96,6 +110,7 @@ class ProjectController extends BaseController
         $result = $this->projectService->update($request);
         return $this->response($result, self::UPDATE);
     }
+
    /**
      * @Route("/FeaturedIdeas", name="getAllFeaturedIdeas",methods={"GET"})
      * @return JsonResponse

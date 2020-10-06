@@ -8,28 +8,27 @@ use App\Request\DeleteRequest;
 use App\Request\GetByIdRequest;
 use App\Request\UpdateCategoryRequest;
 use App\Service\CategoriesService;
+use phpDocumentor\Reflection\Types\Parent_;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CategoriesController  extends BaseController
 {
-
     private $categoryService;
     private $autoMapping;
-    /**
-     * CategoriesController constructor.
-     * @param CategoriesService $categoryService
-     */
-    public function __construct(CategoriesService $categoryService, AutoMapping $autoMapping)
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer, CategoriesService $categoryService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
         $this->categoryService = $categoryService;
         $this->autoMapping = $autoMapping;
+        $this->validator = $validator;
     }
-
-
-
 
     /**
      * @Route("/category", name="createCategories", methods={"POST"})
@@ -41,6 +40,15 @@ class CategoriesController  extends BaseController
         $data = json_decode($request->getContent(), true);
 
         $request = $this->autoMapping->map(\stdClass::class, CreateCategoryRequest::class, (object) $data);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $result = $this->categoryService->create($request);
 
@@ -62,8 +70,6 @@ class CategoriesController  extends BaseController
         $result = $this->categoryService->update($request);
         return $this->response($result, self::UPDATE);
     }
-
-
 
      /**
      * @Route("/categories", name="getAllCategories",methods={"GET"})
@@ -88,7 +94,6 @@ class CategoriesController  extends BaseController
         return $this->response($result, self::FETCH);
     }
 
-     
     /**
      * @Route("/category/{id}", name="deleteCategory",methods={"DELETE"})
      * @param Request $request
@@ -102,6 +107,7 @@ class CategoriesController  extends BaseController
         return $this->response(" ", self::DELETE);
 
     }
+
      /**
      * @Route("/categoriesWithProject", name="getAllCategoriesWithProject",methods={"GET"})
      * @return JsonResponse

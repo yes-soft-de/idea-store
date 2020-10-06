@@ -2,32 +2,32 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\AutoMapping;
 use App\Service\ImageService;
-use AutoMapperPlus\Exception\UnregisteredMappingException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Request\CreateImageRequest;
 use App\Request\GetByIdRequest;
-use App\Request\DeleteRequest;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
 use App\Request\UpdateImageRequest;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class ImageController extends BaseController
 {
-    private $ImageService;
+    private $imageService;
     private $autoMapping;
-    /**
-     * ImageController constructor.
-     * @param ImageService $ImageService
-     */
-    public function __construct(ImageService $imageService,AutoMapping $autoMapping)
+    private $validator;
+
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer,
+                                ImageService $imageService,AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
+        $this->validator = $validator;
         $this->imageService = $imageService;
-        $this->autoMapping=$autoMapping;
+        $this->autoMapping = $autoMapping;
     }
 
     /**
@@ -38,8 +38,20 @@ class ImageController extends BaseController
     public function create(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-         $request=$this->autoMapping->map(\stdClass::class,CreateimageRequest::class,(object)$data);
+
+        $request=$this->autoMapping->map(\stdClass::class,CreateimageRequest::class,(object)$data);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
+
         $result = $this->imageService->create($request);
+
         return $this->response($result, self::CREATE);
         
     }

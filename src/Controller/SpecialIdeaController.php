@@ -11,17 +11,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SpecialIdeaController extends BaseController
 {
     private $specialIdeaService;
     private $autoMapping;
+    private $validator;
 
-    /**
-     * SpecialIdeaController constructor
-     */
-    public function __construct(SpecialIdeaService $specialIdeaService, AutoMapping $autoMapping)
+    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer,
+                                SpecialIdeaService $specialIdeaService, AutoMapping $autoMapping)
     {
+        parent::__construct($serializer);
+        $this->validator = $validator;
         $this->specialIdeaService = $specialIdeaService;
         $this->autoMapping = $autoMapping;
     }
@@ -29,6 +32,7 @@ class SpecialIdeaController extends BaseController
     /**
      * @Route("/special-idea/{idCategory}", name="createSpecialIdea", methods={"POST"})
      * @param Request $request
+     * @param $idCategory
      * @return Response
      */
     public function create(Request $request, $idCategory)
@@ -38,6 +42,15 @@ class SpecialIdeaController extends BaseController
         $request = $this->autoMapping->map(\stdClass::class, CreateSpecialIdeaRequest::class, (object) $data);
 
         $request->setIdCategories($idCategory);
+
+        $violations = $this->validator->validate($request);
+
+        if(count($violations) > 0)
+        {
+            $violationsString = (string)$violations;
+
+            return new JsonResponse($violationsString, Response::HTTP_OK);
+        }
 
         $result = $this->specialIdeaService->create($request, $idCategory);
 
