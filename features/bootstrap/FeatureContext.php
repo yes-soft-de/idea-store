@@ -9,6 +9,11 @@ use Behat\Gherkin\Node\TableNode;
  */
 class FeatureContext implements Context
 {
+    /**
+     * @var GuzzleHttp\Client $httpClient
+     */
+    private $httpClient;
+    //private $response;
 
     /**
      * Initializes context.

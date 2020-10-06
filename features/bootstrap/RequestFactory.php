@@ -28,9 +28,17 @@ class RequestFactory
 
     public function prepareRequestWithUserId($id)
     {
-        //$int_id = (int)$id;
         return [
             "user" => $id
+        ];
+    }
+
+    public function prepareCategoryUpdatePayload($id)
+    {
+        return [
+            "id" => $id,
+            "category" => "behatCategory",
+            "description" => "behat tested"
         ];
     }
 }

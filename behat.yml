@@ -7,5 +7,15 @@ default:
 
     create:
       paths:
-        - "%paths.base%/features/create-category.feature"
+        - "%paths.base%/features/create"
       contexts: [CreateContext]
+
+    login:
+      paths:
+        - "%paths.base%/features/login"
+      contexts: [LoginContext]
+
+    update:
+      paths:
+        - "%paths.base%/features/update"
+      contexts: [UpdateContext]
