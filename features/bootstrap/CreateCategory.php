@@ -7,7 +7,6 @@ trait CreateCategory
      */
     private $category;
 
-
     /**
      * @Given I have a valid category data
      */
@@ -24,7 +23,7 @@ trait CreateCategory
     public function iRequestCategoryCreateWithTheDataIHave()
     {
         $this->response = $this->httpClient->post(
-            ConfigLinks::$BASE_API . ConfigLinks::$CREATE_CATEGORY_ENDPOINT,
+            ConfigLinks::$BASE_API . ConfigLinks::$CATEGORY_ENDPOINT,
             [
                 "json" => $this->category
             ]

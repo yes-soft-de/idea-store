@@ -4,7 +4,6 @@ namespace App\Request;
 
 class CreateOrderRequest
 {
-   
     private $id;
     public $user;
     public $project;

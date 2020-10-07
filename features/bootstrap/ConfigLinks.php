@@ -10,5 +10,7 @@ class ConfigLinks
     static $USERS_QUERY_ENDPOINT = 'users';
     static $USER_QUERY_BY_ID_ENDPOINT = 'users';
 
-    static $CREATE_CATEGORY_ENDPOINT = 'category';
+    static $PROJECT_ENDPOINT = 'project';
+
+    static $CATEGORY_ENDPOINT = 'category';
 }

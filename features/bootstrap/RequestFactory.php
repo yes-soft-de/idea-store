@@ -14,16 +14,37 @@ class RequestFactory
 
     public function prepareCreateUserRequestPayload()
     {
-        $userMapper = new MapperUser();
+//        $userMapper = new MapperUser();
+//
+//        $userMapper->setUser("Behat8989@test.com",
+//            "['ROLE_USER']",
+//            "000",
+//            "Behat8989",
+//            "12122112",
+//            "08-07-2020");
+//
+//        return $userMapper->getUserAsArray();
+    }
 
-        $userMapper->setUser("Behat8989@test.com",
-            "['ROLE_USER']",
-            "000",
-            "Behat8989",
-            "12122112",
-            "08-07-2020");
+    public function prepareCreateProjectPayload()
+    {
+        $projectMapper = new MapperProject();
 
-        return $userMapper->getUserAsArray();
+        $projectMapper->setProject("Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "Behat test",
+        "false");
+
+        return $projectMapper->getProjectAsArray();
     }
 
     public function prepareRequestWithUserId($id)

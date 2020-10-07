@@ -10,12 +10,12 @@ default:
         - "%paths.base%/features/create"
       contexts: [CreateContext]
 
-    login:
-      paths:
-        - "%paths.base%/features/login"
-      contexts: [LoginContext]
-
     update:
       paths:
         - "%paths.base%/features/update"
       contexts: [UpdateContext]
+
+    delete:
+      paths:
+        - "%paths.base%/features/delete"
+      contexts: [DeleteContext]

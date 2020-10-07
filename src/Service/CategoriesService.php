@@ -86,7 +86,7 @@ class CategoriesService
        
         $response=[];
         foreach ($result as $row)
-            $response[] = $this->autoMapping->map('array'::class, GetCategoryResponseWithProject::class, $row);
+            $response[] = $this->autoMapping->map('array', GetCategoryResponseWithProject::class, $row);
         return $response;
 
     }

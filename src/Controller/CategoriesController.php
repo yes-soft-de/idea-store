@@ -8,7 +8,6 @@ use App\Request\DeleteRequest;
 use App\Request\GetByIdRequest;
 use App\Request\UpdateCategoryRequest;
 use App\Service\CategoriesService;
-use phpDocumentor\Reflection\Types\Parent_;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -105,7 +104,6 @@ class CategoriesController  extends BaseController
         $result = $this->categoryService->delete($request);
 
         return $this->response(" ", self::DELETE);
-
     }
 
      /**

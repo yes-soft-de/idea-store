@@ -27,4 +27,5 @@ class CreateContext implements Context
     use CreateCommon;
     //use CreateUser;
     use CreateCategory;
+    use CreateProject;
 }
