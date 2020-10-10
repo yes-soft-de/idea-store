@@ -1,40 +1,20 @@
 <?php
 
 
-namespace App\Request;
-
-
-use DateTime;
-
-class CreateUserRequest
+class ObjectUser
 {
-    private $id;
     private $email;
     private $roles;
     private $password;
     private $userName;
     private $phone;
+    /**
+     * @var DateTime $createdTime
+     */
     private $createdTime;
 
     public function __construct()
     {
-        $this->createdTime = new DateTime('Now');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -118,7 +98,7 @@ class CreateUserRequest
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getCreatedTime(): DateTime
     {
@@ -126,10 +106,11 @@ class CreateUserRequest
     }
 
     /**
-     * @param mixed $createdTime
+     * @param DateTime $createdTime
      */
     public function setCreatedTime(DateTime $createdTime): void
     {
         $this->createdTime = $createdTime;
     }
+
 }

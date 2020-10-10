@@ -30,15 +30,14 @@ class SpecialIdeaService
 
         $specialIdeaResult->getIdCategories($idCategory);
 
-        $response = $this->autoMapping->map(SpecialIdea::class, CreateSpecialIdeaResponse::class, $specialIdeaResult);
-
-        return $response;
+        return $this->autoMapping->map(SpecialIdea::class, CreateSpecialIdeaResponse::class, $specialIdeaResult);
     }
 
     public function getAll()
     {
-        $result = $this->specialIdeaManager->getAll();
         $response = [];
+        $result = $this->specialIdeaManager->getAll();
+
         foreach ($result as $row) {
             $response[] = $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaResponse::class, $row);
         }
@@ -49,16 +48,16 @@ class SpecialIdeaService
     public function getById($request)
     {
         $result = $this->specialIdeaManager->getById($request);
-        $response = $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class, $result);
-        return $response;
+
+        return $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class, $result);
     }
 
     public function delete($request)
     {
         $specialIdeaResult = $this->specialIdeaManager->delete($request);
-        $response = $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class,
+
+        return $this->autoMapping->map(SpecialIdea::class, GetSpecialIdeaByIdResponse::class,
             $specialIdeaResult);
-        return $response;
     }
 
 }

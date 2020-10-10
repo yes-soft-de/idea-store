@@ -25,14 +25,15 @@ class UserService
     public function create($request)
     {
         $result = $this->userManager->create($request);
-        $response = $this->autoMapping->map(User::class, CreateUserResponse::class, $result);
-        return $response;
+
+        return $this->autoMapping->map(User::class, CreateUserResponse::class, $result);
     }
 
     public function getAll()
     {
-        $result = $this->userManager->getAll();
         $response = [];
+        $result = $this->userManager->getAll();
+
         if(is_array($result)||is_object($result)) {
             foreach ($result as $row)
                 $response[] = $this->autoMapping->map(User::class, GetUserResponse::class, $row);
@@ -44,7 +45,7 @@ class UserService
     public function getUserById($request)
     {
         $result = $this->userManager->getUserById($request);
-        $response = $this->autoMapping->map(User::class, GetUserByIdResponse::class, $result);
-        return $response;
+
+        return $this->autoMapping->map(User::class, GetUserByIdResponse::class, $result);
     }
 }

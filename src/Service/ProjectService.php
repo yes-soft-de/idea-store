@@ -8,17 +8,14 @@ use App\Manager\ImageManager;
 use App\Manager\ProjectManager;
 use App\Request\CreateImageRequest;
 use App\Respons\CreateProjectResponse;
-use App\Respons\GetImageByIdResponse;
 use App\Respons\GetProjectByIdResponse;
 use App\Respons\GetProjectsResponse;
 use App\Respons\UpdateProjectResponse;
-
-use App\Request\UpdateProjectRequest;
 use App\Request\UpdateImageRequest;
 
 class ProjectService
 {
-    private $ProjectManager;
+    private $projectManager;
     private $autoMapping;
     private $imageManager;
 
@@ -49,10 +46,10 @@ class ProjectService
 
     public function getAll()
     {
-        $result = $this->projectManager->getAll();
         $response = [];
+        $result = $this->projectManager->getAll();
         foreach ($result as $row) {
-            $response[] = $this->autoMapping->map('array'::class, GetProjectsResponse::class, $row);
+            $response[] = $this->autoMapping->map('array', GetProjectsResponse::class, $row);
         }
 
         return $response;
@@ -72,9 +69,7 @@ class ProjectService
     {
         $imageResult = $this->imageManager->delete($request);
         $projectResult = $this->projectManager->delete($request);
-        $response = $this->autoMapping->map(Project::class, GetProjectByIdResponse::class, $projectResult);
-       
-        return $response;
+        return $this->autoMapping->map(Project::class, GetProjectByIdResponse::class, $projectResult);
 
     }
     public function update($request)
@@ -95,7 +90,7 @@ class ProjectService
         $result = $this->projectManager->getAllFeaturedIdeas();
         $response = [];
         foreach ($result as $row) {
-            $response[] = $this->autoMapping->map('array'::class, GetProjectsResponse::class, $row);
+            $response[] = $this->autoMapping->map('array', GetProjectsResponse::class, $row);
         }
 
         return $response;

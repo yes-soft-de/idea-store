@@ -27,32 +27,33 @@ class MessageService
         $request->setUser($request->getUser($idUser));
         $result = $this->messageManager->create($request);
         $result->getUser($idUser);
-        $response = $this->autoMapping->map(Messages::class, CreateMessageResponse::class, $result);
-        return $response;
+        return $this->autoMapping->map(Messages::class, CreateMessageResponse::class, $result);
     }
 
     public function getAll()
     {
-        $result = $this->messageManager->getAllMessages();
         $response = [];
+        $result = $this->messageManager->getAllMessages();
+
         foreach ($result as $row)
         {
             $response[] = $this->autoMapping->map(Messages::class, GetMessageResponse::class, $row);
         }
+
         return $response;
     }
 
     public function getById($request)
     {
         $result = $this->messageManager->getMessageById($request);
-        $response = $this->autoMapping->map(Messages::class, GetMessageByIdResponse::class, $result);
-        return $response;
+
+        return $this->autoMapping->map(Messages::class, GetMessageByIdResponse::class, $result);
     }
 
     public function delete($request)
     {
         $messageResult = $this->messageManager->delete($request);
-        $response = $this->autoMapping->map(Messages::class, GetMessageByIdResponse::class, $messageResult);
-        return $response;
+
+        return $this->autoMapping->map(Messages::class, GetMessageByIdResponse::class, $messageResult);
     }
 }

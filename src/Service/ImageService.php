@@ -8,20 +8,14 @@ use App\AutoMapping;
 use App\Entity\Images;
 use App\Manager\ImageManager;
 use App\Respons\CreateImageResponse;
-use Symfony\Component\HttpFoundation\Request;
 use App\Respons\GetImagesResponse;
 use App\Respons\GetImageByIdResponse;
-use App\Response\DeleteResponse;
 use App\Respons\UpdateImageResponse;
-use Symfony\Component\Routing\Exception\NoConfigurationException;
-use Doctrine\ORM\NonUniqueResultException;
 
 class ImageService
-
 {
     private $imageManager;
     private $autoMapping;
-
 
     public function __construct(ImageManager $imageManager, AutoMapping $autoMapping)
     {
@@ -32,53 +26,53 @@ class ImageService
     public function create($request)
     {  
         $imageResult = $this->imageManager->create($request);
-        $response = $this->autoMapping->map(Images::class, CreateImageResponse::class,
+
+        return $this->autoMapping->map(Images::class, CreateImageResponse::class,
             $imageResult);
-        return $response;
-    }
-    
-    
-    public function getAll()
-    {
-        $result = $this->imageManager->getAll();
-        $response=[];
-        foreach ($result as $row)
-            $response[] = $this->autoMapping->map(Images::class, GetImagesResponse::class, $row);
-        return $response;
     }
 
+    public function getAll()
+    {
+        $response=[];
+        $result = $this->imageManager->getAll();
+
+        foreach ($result as $row)
+        {
+            $response[] = $this->autoMapping->map(Images::class, GetImagesResponse::class, $row);
+        }
+
+        return $response;
+    }
 
     public function getImageById($request)
     {
         $result = $this->imageManager->getImageById($request);
-        $response = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
-        return $response;
-    }
 
+        return $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
+    }
 
     public function delete($request)
     {
         $result = $this->imageManager->delete($request);
         $response = $this->autoMapping->map(Images::class, GetImageByIdResponse::class, $result);
-        //$error=[];
-        if(!$response){
-           $error=['error'=>"this project not found!!!"];
-           return $error;
+
+        if(!$response)
+        {
+           return null;
         }
-        else{
-        return $response;}
-        // $response = new DeleteResponse($result->getId());
-      
-        // return $response;
-          
+        else
+        {
+        return $response;
+        }
     }
     public function update($request)
     {
         $imageResult = $this->imageManager->update($request);
+
         $response = $this->autoMapping->map(Images::class, UpdateImageResponse::class, $imageResult);
         $response->setImage($request->getImage());
+
         return $response;
     }
-   
 
 }
