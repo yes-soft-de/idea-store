@@ -7,13 +7,12 @@ use Behat\Gherkin\Node\TableNode;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context
+class QueryContext implements Context
 {
     /**
      * @var GuzzleHttp\Client $httpClient
      */
     private $httpClient;
-    //private $response;
 
     /**
      * Initializes context.
@@ -26,7 +25,23 @@ class FeatureContext implements Context
     {
     }
 
+    /**
+     * @When I request users list
+     */
+    public function iRequestUsersList()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API.ConfigLinks::$USERS_QUERY_ENDPOINT);
+    }
+
+    /**
+     * @When /^I request all articles$/
+     */
+    public function iRequestAllArticles()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API.ConfigLinks::$ARTICLE_ENDPOINT);
+    }
+
     use QueriesCommon;
-    use QueriesAllUsers;
     use QueryUser;
+    use QueryArticle;
 }

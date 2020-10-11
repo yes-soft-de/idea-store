@@ -1,32 +1,16 @@
 <?php
 
 
-namespace App\Request;
-
-
-class UpdateArticleRequest
+class ObjectArticle
 {
-    private $id;
     private $articleTitle;
     private $article;
+    /**
+     * @var DateTime $date
+     */
     private $date;
+    // integer
     private $idCategory;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed
@@ -61,20 +45,35 @@ class UpdateArticleRequest
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
         return $this->date;
     }
 
     /**
-     * @param mixed $date
+     * @param DateTime $date
      */
-    public function setDate($date): void
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIdCategory()
+    {
+        return $this->idCategory;
+    }
+
+    /**
+     * @param mixed $idCategory
+     */
+    public function setIdCategory($idCategory): void
+    {
+        $this->idCategory = $idCategory;
+    }
 
 }

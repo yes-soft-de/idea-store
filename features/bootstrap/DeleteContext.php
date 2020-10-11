@@ -9,6 +9,10 @@ class DeleteContext implements Context
      * @var GuzzleHttp\Client $httpClient
      */
     private $httpClient;
+    /**
+     * @var GuzzleHttp\Psr7\Response
+     */
+    public $response;
 
     public function __construct()
     {
@@ -24,7 +28,25 @@ class DeleteContext implements Context
         return true;
     }
 
+    /**
+     * @When /^I request delete a category of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteACategoryOfID($arg1)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$CATEGORY_ENDPOINT.'/'.$arg1
+        );
+    }
 
+    /**
+     * @When /^I request delete an article of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteAnArticleOfID($arg2)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$ARTICLE_ENDPOINT.'/'.$arg2
+        );
+    }
 
     use QueriesCommon;
     use DeleteCommon;

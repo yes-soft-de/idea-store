@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\AutoMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -22,11 +20,10 @@ class BaseController extends AbstractController
         $this->serializer = $serializer;
     }
     const STATE_OK = 200;
-    const CREATE = ["created ","201"];
-    const UPDATE=["updated","204"];
-    const DELETE=["deleted","401"];
-    const FETCH=["fetched","200"];
-    //const NOTFOUND=["Not found", "404"];
+    const CREATE = ["Created ","201"];
+    const UPDATE=["Updated","204"];
+    const DELETE=["Deleted","401"];
+    const FETCH=["Fetched","200"];
 
     /**
      * @return mixed
@@ -44,7 +41,6 @@ class BaseController extends AbstractController
         $this->statusCode = $statusCode;
     }
 
-
     /**
      * Returns a JSON response
      *
@@ -53,7 +49,6 @@ class BaseController extends AbstractController
      *
      * @return JsonResponse
      */
-
     public function respond($data, $headers = [])
     {
         return new JsonResponse($data, self::STATE_OK, $headers);
@@ -102,20 +97,25 @@ class BaseController extends AbstractController
     }
     public function response($result, $status) :jsonResponse
     {
-        if($result!=null) {
+        if($result != null)
+        {
             $encoders = [new JsonEncoder()];
             $normalizers = [new ObjectNormalizer()];
             $this->serializer = new Serializer($normalizers, $encoders);
+
             $result = $this->serializer->serialize($result, "json", [
                 'enable_max_depth' => true]);
+
             $response = new jsonResponse(["status_code" => $status[1],
                     "msg" => $status[0] . " " . "Successfully.",
                     "Data" => json_decode($result)
                 ]
                 , Response::HTTP_OK);
+
             $response->headers->set('Access-Control-Allow-Headers', 'X-Header-One,X-Header-Two');
             $response->headers->set('Access-Control-Allow-Origin', '*');
             $response->headers->set('Access-Control-Allow-Methods', 'PUT');
+
             return $response;
         }
         else

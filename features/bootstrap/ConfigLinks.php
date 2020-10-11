@@ -13,4 +13,6 @@ class ConfigLinks
     static $PROJECT_ENDPOINT = 'project';
 
     static $CATEGORY_ENDPOINT = 'category';
+
+    static $ARTICLE_ENDPOINT = 'articles';
 }

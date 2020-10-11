@@ -6,6 +6,16 @@ use Psr\Http\Message\ResponseInterface;
 trait CreateCommon
 {
     /**
+     * @Given /^I am signed in admin$/
+     */
+    public function iAmSignedInAdmin()
+    {
+        $this->httpClient = new Client(['base_uri'=>ConfigLinks::$BASE_API]);
+
+        return true;
+    }
+
+    /**
      * @Given I am an unsigned in user
      */
     public function iAmAnUnsignedInUser()

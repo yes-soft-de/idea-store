@@ -57,18 +57,17 @@ class ArticleController extends BaseController
     }
 
     /**
-     * @Route("/articles/{id}", name="updateArticle", methods={"PUT"})
+     * @Route("articles", name="updateArticle", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse|Response
      */
     public function update(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $id = $request->get('id');
+
         $request = $this->autoMapping->map(\stdClass::class, UpdateArticleRequest::class, (object)$data);
-        $request->setId($id);
-        $request->setArticle($request->getArticle('article'));
         $result = $this->articleService->update($request);
+
         return $this->response($result, self::UPDATE);
     }
 
@@ -104,6 +103,7 @@ class ArticleController extends BaseController
     {
         $request = new DeleteRequest($request->get('id'));
         $result = $this->articleService->delete($request);
-        return $this->response("",self::DELETE);
+
+        return $this->response($result,self::DELETE);
     }
 }

@@ -103,7 +103,7 @@ class CategoriesController  extends BaseController
         $request = new DeleteRequest($request->get('id'));
         $result = $this->categoryService->delete($request);
 
-        return $this->response(" ", self::DELETE);
+        return $this->response($result, self::DELETE);
     }
 
      /**

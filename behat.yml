@@ -3,7 +3,7 @@ default:
     query:
       paths:
         - "%paths.base%/features/query"
-      contexts: [FeatureContext]
+      contexts: [QueryContext]
 
     create:
       paths:

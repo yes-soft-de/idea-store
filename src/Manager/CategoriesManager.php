@@ -7,14 +7,9 @@ use App\Entity\Categories;
 use App\Repository\CategoriesRepository;
 use App\Request\CreateCategoryRequest;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use App\Request\GetByIdRequest;
 use App\Request\DeleteRequest;
 use App\Request\UpdateCategoryRequest;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Flex\Response;
-
 
 class CategoriesManager
 {
@@ -41,12 +36,9 @@ class CategoriesManager
         return $categoryEntity;
     }
 
-
     public function getAll()
     {
-        $data = $this->categoryRepository->findAll();
-
-        return $data;
+        return $this->categoryRepository->findAll();
     }
 
     public function getCategoryById(GetByIdRequest $request)
@@ -54,27 +46,31 @@ class CategoriesManager
         return $result = $this->categoryRepository->findCategoryByld($request->getId());
     }
     
-    
     public function delete(DeleteRequest $request)
     {
         $category = $this->categoryRepository->findCategoryByld($request->getId());
-        if (!$category ) {
-          
-        } 
-         else{   
 
+        if (!$category )
+        {
+            return null;
+        } 
+        else
+        {
             $this->entityManager->remove($category);
             $this->entityManager->flush();
-         }
-         return $category;
+        }
+        return $category;
     }
+
     public function update(UpdateCategoryRequest $request)
     {
         $categoryEntity = $this->categoryRepository->findCategoryByld($request->getId());
         
-        if (!$categoryEntity) {
+        if (!$categoryEntity)
+        {
            
-        } else {
+        }
+        else {
             $categoryEntity = $this->autoMapping->mapToObject(UpdateCategoryRequest::class,
             Categories::class, $request, $categoryEntity);
               
@@ -85,8 +81,7 @@ class CategoriesManager
 
     public function getAllCategoriesWithProject()
     {
-        $data = $this->categoryRepository->getAllCategoriesWithProject();
-        return $data;
+        return $this->categoryRepository->getAllCategoriesWithProject();
     }
 
 }

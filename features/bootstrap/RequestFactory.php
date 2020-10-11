@@ -3,6 +3,32 @@
 
 class RequestFactory
 {
+    public function prepareCreateArticleRequestPayload()
+    {
+        $articleMapper = new MapperArticle();
+
+        $articleMapper->setArticle("Behat test", "Testing create article api", "1");
+
+        return $articleMapper->getArticleAsArray();
+    }
+
+    public function prepareArticleUpdateRequestPayload($id)
+    {
+        return [
+            "id" => $id,
+            "articleTitle" => "Behat Update API Test",
+            "article" => "Behat Update API Test",
+            "idCategory" => "1"
+        ];
+    }
+
+    public function prepareRequestWithArticleId($id)
+    {
+        return [
+            "article" => $id
+        ];
+    }
+
     public function prepareCreateCategoryRequestPayload()
     {
         $categoryMapper = new MapperCategory();

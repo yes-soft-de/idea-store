@@ -55,15 +55,14 @@ class CategoriesService
     public function delete($request)
     {
         $result = $this->categoryManager->delete($request);
-        $response = $this->autoMapping->map(Categories::class, GetCategoryByIdResponse::class, $result);
 
-        if(!$response)
+        if(!($result instanceof  Categories))
         {
            return null;
         }
         else
         {
-            return $response;
+            return $this->autoMapping->map(Categories::class, GetCategoryByIdResponse::class, $result);
         }
     }
 
