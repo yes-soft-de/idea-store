@@ -9,7 +9,6 @@ class UpdateImageResponse
     public $image;
     public $project;
 
-
     /**
      * @return mixed
      */
@@ -27,7 +26,6 @@ class UpdateImageResponse
 
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -50,20 +48,18 @@ class UpdateImageResponse
     /**
      * @return mixed
      */
-    public function getProject(): ?string
+    public function getProject()
     {
         return $this->project;
     }
+
     /**
      * @param mixed $project
      */
-    public function setProject(?string $project): self
+    public function setProject($project): void
     {
         $this->project = $project;
-
-        return $this;
     }
 
-    
 
 }

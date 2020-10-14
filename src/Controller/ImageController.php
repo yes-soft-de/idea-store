@@ -31,7 +31,7 @@ class ImageController extends BaseController
     }
 
     /**
-     * @Route("/image", name="createimage",methods={"POST"})
+     * @Route("/image", name="createimage", methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -55,8 +55,9 @@ class ImageController extends BaseController
         return $this->response($result, self::CREATE);
         
     }
+
     /**
-     * @Route("/images", name="getAllImages",methods={"GET"})
+     * @Route("/images", name="getAllImages", methods={"GET"})
      * @return JsonResponse
      */
     public function getAll()
@@ -66,7 +67,7 @@ class ImageController extends BaseController
     }
 
     /**
-     * @Route("/image/{id}", name="getImageById",methods={"GET"})
+     * @Route("/image/{id}", name="getImageById", methods={"GET"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -79,17 +80,18 @@ class ImageController extends BaseController
     }
 
      /**
-     * @Route("/image/{id}", name="updateImage",methods={"PUT"})
+     * @Route("/image", name="updateImage", methods={"PUT"})
      * @param Request $request
      * @return JsonResponse|Response
      */
     public function update(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $id = $request->get('id');
+
         $request = $this->autoMapping->map(\stdClass::class, UpdateImageRequest::class, (object) $data);
-        $request->setId($id);
+
         $result = $this->imageService->update($request);
+
         return $this->response($result, self::UPDATE);
     }
 

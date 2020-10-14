@@ -79,17 +79,22 @@ class ImageManager
     }
     public function update(UpdateImageRequest $request)
     {
-        if($request->project){
+        if($request->project)
+        {
             $project= $this->entityManager->getRepository(Project::class)
             ->find($request->project);
+
             $request->setProject($project);
            
         }
         $imageEntity = $this->imageRepository->findImageByld($project->getId());
         
-        if (!$imageEntity) {
+        if (!$imageEntity)
+        {
            
-        } else {
+        }
+        else
+        {
             $imageEntity = $this->autoMapping->mapToObject(UpdateImageRequest::class,
                 Images::class, $request, $imageEntity);
               

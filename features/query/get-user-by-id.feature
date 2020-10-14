@@ -7,7 +7,7 @@ Feature: Get single user
     And I should get a valid json
     And The json should contain valid user name
 
-  Scenario:
+  Scenario: Get a user by non-exist Id
     Given I have a wrong user Id of "100"
     And I have access to the user query endpoint
     When I request user by Id

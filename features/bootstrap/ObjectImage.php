@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Respons;
 
-class CreateImageResponse
+class ObjectImage
 {
-    
-    private $id;
     private $image;
+
     private $project;
 
-    /**
-     * @return mixed
-     */
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
     }
+
     /**
      * @return mixed
      */
-
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
@@ -28,11 +22,9 @@ class CreateImageResponse
     /**
      * @param mixed $image
      */
-    public function setImage(string $image): self
+    public function setImage($image): void
     {
         $this->image = $image;
-
-        return $this;
     }
 
     /**
@@ -50,5 +42,6 @@ class CreateImageResponse
     {
         $this->project = $project;
     }
+
 
 }

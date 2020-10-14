@@ -38,17 +38,39 @@ class RequestFactory
         return $categoryMapper->getCategoryAsArray();
     }
 
-    public function prepareCreateUserRequestPayload()
+    public function prepareCategoryUpdatePayload($id)
     {
-        $userMapper = new MapperUser();
+        return [
+            "id" => $id,
+            "category" => "behatCategory",
+            "description" => "behat tested"
+        ];
+    }
 
-        $userMapper->setUser("BehatUser1@test.com",
-            "['ROLE_USER']",
-            "000",
-            "BehatUser1",
-            "121224");
+    public function prepareRequestWithCategoryId($id)
+    {
+        return [
+            "category" => $id
+        ];
+    }
 
-        return $userMapper->getUserAsArray();
+    public function prepareCreateImagePayload($arg1)
+    {
+        $imageMapper = new MapperImage();
+
+        $imageMapper->setImage(
+            "BehatImageTest",$arg1
+        );
+
+        return $imageMapper->getImageAsArray();
+    }
+
+    public function prepareImageUpdatePayload($id)
+    {
+        return [
+            "image" => "BehatTestUpdateImage",
+            "project" => $id
+        ];
     }
 
     public function prepareCreateProjectPayload()
@@ -72,6 +94,26 @@ class RequestFactory
         return $projectMapper->getProjectAsArray();
     }
 
+    public function prepareRequestWithProjectId($id)
+    {
+        return [
+            "project" => $id
+        ];
+    }
+
+    public function prepareCreateUserRequestPayload()
+    {
+        $userMapper = new MapperUser();
+
+        $userMapper->setUser("BehatUser1@test.com",
+            "['ROLE_USER']",
+            "000",
+            "BehatUser1",
+            "121224");
+
+        return $userMapper->getUserAsArray();
+    }
+
     public function prepareRequestWithUserId($id)
     {
         return [
@@ -79,12 +121,4 @@ class RequestFactory
         ];
     }
 
-    public function prepareCategoryUpdatePayload($id)
-    {
-        return [
-            "id" => $id,
-            "category" => "behatCategory",
-            "description" => "behat tested"
-        ];
-    }
 }
