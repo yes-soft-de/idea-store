@@ -8,9 +8,6 @@ class ObjectUser
     private $password;
     private $userName;
     private $phone;
-    /**
-     * @var DateTime $createdTime
-     */
     private $createdTime;
 
     public function __construct()
@@ -98,17 +95,17 @@ class ObjectUser
     }
 
     /**
-     * @return DateTime
+     * @return mixed
      */
-    public function getCreatedTime(): DateTime
+    public function getCreatedTime()
     {
         return $this->createdTime;
     }
 
     /**
-     * @param DateTime $createdTime
+     * @param mixed $createdTime
      */
-    public function setCreatedTime(DateTime $createdTime): void
+    public function setCreatedTime($createdTime): void
     {
         $this->createdTime = $createdTime;
     }

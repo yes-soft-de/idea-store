@@ -27,6 +27,17 @@ trait CreateCommon
     }
 
     /**
+     * @Given I am signed in user
+     */
+    public function iAmSignedInUser()
+    {
+        $this->httpClient = new Client(['base_uri'=>ConfigLinks::$BASE_API,
+            'timeout'=>10.0]);
+
+        return true;
+    }
+
+    /**
      * @Then I should get a response code with :arg1
      * @throws Exception
      */

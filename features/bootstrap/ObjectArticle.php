@@ -5,11 +5,7 @@ class ObjectArticle
 {
     private $articleTitle;
     private $article;
-    /**
-     * @var DateTime $date
-     */
     private $date;
-    // integer
     private $idCategory;
 
     /**
@@ -45,17 +41,17 @@ class ObjectArticle
     }
 
     /**
-     * @return DateTime
+     * @return mixed
      */
-    public function getDate(): DateTime
+    public function getDate()
     {
         return $this->date;
     }
 
     /**
-     * @param DateTime $date
+     * @param mixed $date
      */
-    public function setDate(DateTime $date): void
+    public function setDate($date): void
     {
         $this->date = $date;
     }

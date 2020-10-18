@@ -17,7 +17,11 @@ class ConfigLinks
 
     static $IMAGES_QUERY_ENDPOINT = 'images';
 
+    static $MESSAGE_ENDPOINT = 'messages';
+
     static $PROJECT_ENDPOINT = 'project';
+
+    static $ORDER_ENDPOINT = 'order';
 
     static $CREATE_USER_ENDPOINT = 'register';
 

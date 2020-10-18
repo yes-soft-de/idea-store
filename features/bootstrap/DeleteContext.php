@@ -48,6 +48,16 @@ class DeleteContext implements Context
         );
     }
 
+    /**
+     * @When /^I request delete a project of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteAProjectOfID($arg1)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$PROJECT_ENDPOINT.'/'.$arg1
+        );
+    }
+
     use QueriesCommon;
     use DeleteCommon;
 }

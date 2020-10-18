@@ -20,21 +20,23 @@ class MapperArticle
         return $this->article;
     }
 
-    public function setArticle($articleTitle, $article, $idCategory): void
+    public function setArticle($articleTitle, $article, $idCategory, $date): void
     {
         $this->article = new ObjectArticle();
 
         $this->article->setArticleTitle($articleTitle);
         $this->article->setArticle($article);
         $this->article->setIdCategory($idCategory);
+        $this->article->setDate($date);
     }
 
     public function getArticleAsArray(): array
     {
         return [
-            "title"=>$this->article->getArticleTitle(),
+            "articleTitle"=>$this->article->getArticleTitle(),
             "article"=>$this->article->getArticle(),
-            "category"=>$this->article->getIdCategory()
+            "idCategory"=>$this->article->getIdCategory(),
+            "date" =>$this->article->getDate()
         ];
     }
 }

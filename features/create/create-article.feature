@@ -4,3 +4,4 @@ Feature: Create an article
     And I have a valid article data
     When I request article create with the data I have
     Then I should get a response code with "200"
+    And The json should contain the new article

@@ -5,3 +5,4 @@ Feature: Create an image
     And I have a valid image data
     When I request image create with the data I have
     Then I should get a response code with "200"
+    And The json should contain the new image

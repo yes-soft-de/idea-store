@@ -11,6 +11,9 @@ class CreateContext implements Context
      */
     private $httpClient;
     private $request;
+//    /**
+//     * @var GuzzleHttp\Psr7\Response
+//     */
     private $response;
 
     /**
@@ -37,6 +40,11 @@ class CreateContext implements Context
      * @var array $image
      */
     private $image;
+
+    /**
+     * @var array $message
+     */
+    private $message;
 
     /**
      * Initializes context.
@@ -73,6 +81,19 @@ class CreateContext implements Context
     }
 
     /**
+     * @Given /^The json should contain the new article$/
+     */
+    public function theJsonShouldContainTheNewArticle()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["articleTitle"] != "Behat test")
+        {
+            throw new Exception('Error in creating new article!');
+        }
+    }
+
+    /**
      * @Given I have a valid category data
      */
     public function iHaveAValidCategoryData()
@@ -96,6 +117,19 @@ class CreateContext implements Context
     }
 
     /**
+     * @Given /^The json should contain the new category$/
+     */
+    public function theJsonShouldContainTheNewCategory()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["category"] != "Fantasy")
+        {
+            throw new Exception('Error in creating new category!');
+        }
+    }
+
+    /**
      * @Given /^I have a valid project data$/
      */
     public function iHaveAValidProjectData()
@@ -116,6 +150,19 @@ class CreateContext implements Context
                 "json" => $this->project
             ]
         );
+    }
+
+    /**
+     * @Given /^The json should contain the new project$/
+     */
+    public function theJsonShouldContainTheNewProject()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["projectName"] != "Behat test 12")
+        {
+            throw new Exception('Error in creating new project!');
+        }
     }
 
     /**
@@ -187,6 +234,69 @@ class CreateContext implements Context
             ]
         );
     }
+
+    /**
+     * @Given /^The json should contain the new image$/
+     */
+    public function theJsonShouldContainTheNewImage()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["image"] != "BehatImageTest")
+        {
+            throw new Exception('Error in creating new image!');
+        }
+    }
+
+    /**
+     * @Given /^The json should contain the new user name$/
+     */
+    public function theJsonShouldContainTheNewUserName()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["userName"] != "BehatUser123")
+        {
+            throw new Exception('Error in creating new user!');
+        }
+    }
+
+    /**
+     * @Given /^I have a valid message data from userID "([^"]*)"$/
+     */
+    public function iHaveAValidMessageDataFromUserID($arg1)
+    {
+        $factory = new RequestFactory();
+
+        $this->message = $factory->prepareCreateMessageRequestPayload($arg1);
+    }
+
+    /**
+     * @When /^I request message create with the data I have$/
+     */
+    public function iRequestMessageCreateWithTheDataIHave()
+    {
+        $this->response = $this->httpClient->post(
+            ConfigLinks::$BASE_API . ConfigLinks::$MESSAGE_ENDPOINT . '/' . $this->message["user"],
+            [
+                "json" => $this->message
+            ]
+        );
+    }
+
+    /**
+     * @Then The json should contain the subject of the created message
+     */
+    public function theJsonShouldContainTheSubjectOfTheCreatedMessage()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["subject"] != "HelloBehat")
+        {
+            throw new Exception('Error in creating new message!');
+        }
+    }
+
 
     use CreateCommon;
 }

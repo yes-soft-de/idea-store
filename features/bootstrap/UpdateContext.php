@@ -32,6 +32,16 @@ class UpdateContext implements Context
     private $image;
 
     /**
+     * @var array $project
+     */
+    private $project;
+
+    /**
+     * @var array $order
+     */
+    private $order;
+
+    /**
      * UpdateContext constructor.
      */
     public function __construct()
@@ -97,6 +107,38 @@ class UpdateContext implements Context
         {
             throw new Exception('The image was not being updated correctly!');
         }
+    }
+
+    /**
+     * @When /^I request project update of ID "([^"]*)"$/
+     */
+    public function iRequestProjectUpdateOfID($arg1)
+    {
+        $factory = new RequestFactory();
+
+        $this->project = $factory->prepareProjectUpdateRequestPayload($arg1);
+
+        $this->response = $this->httpClient->put(
+            ConfigLinks::$BASE_API . ConfigLinks::$PROJECT_ENDPOINT . '/' . $arg1,
+            [
+                "json"=>$this->project
+            ]);
+    }
+
+    /**
+     * @When /^I request order update of ID "([^"]*)" and user "([^"]*)" and project "([^"]*)"$/
+     */
+    public function iRequestOrderUpdateOfIDAndUserAndProject($arg1, $arg2, $arg3)
+    {
+        $factory = new RequestFactory();
+
+        $this->order = $factory->prepareOrderUpdateRequestPayload($arg1, $arg2, $arg3);
+
+        $this->response = $this->httpClient->put(
+            ConfigLinks::$BASE_API . ConfigLinks::$ORDER_ENDPOINT . '/' . $arg1. '/' . $arg2. '/' . $arg3,
+            [
+                "json"=>$this->order
+            ]);
     }
 
     use CreateCommon;

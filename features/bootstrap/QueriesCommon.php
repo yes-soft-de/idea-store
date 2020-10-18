@@ -56,4 +56,22 @@ trait QueriesCommon
         }
     }
 
+    /**
+     * @Given /^I should get the message fetched successfully$/
+     */
+    public function iShouldGetTheMessageFetchedSuccessfully()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data['msg'] == "Fetched Successfully.")
+        {
+            return true;
+        }
+        else
+        {
+            //throw new Exception('Unexpected returned message!');
+            echo "The item does not exist!";
+        }
+    }
+
 }

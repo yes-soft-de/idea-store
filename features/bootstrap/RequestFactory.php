@@ -7,7 +7,12 @@ class RequestFactory
     {
         $articleMapper = new MapperArticle();
 
-        $articleMapper->setArticle("Behat test", "Testing create article api", "1");
+        $articleMapper->setArticle(
+            "Behat test",
+            "Testing create article api",
+            "1",
+            "2020-10-12"
+        );
 
         return $articleMapper->getArticleAsArray();
     }
@@ -42,7 +47,7 @@ class RequestFactory
     {
         return [
             "id" => $id,
-            "category" => "behatCategory",
+            "category" => "behatCategory2",
             "description" => "behat tested"
         ];
     }
@@ -52,6 +57,15 @@ class RequestFactory
         return [
             "category" => $id
         ];
+    }
+
+    public function prepareCreateMessageRequestPayload($arg1)
+    {
+        $messageMapper = new MapperMessage();
+
+        $messageMapper->setMessage("Hello from Behat", $arg1,"2020-10-10");
+
+        return $messageMapper->getMessageAsArray();
     }
 
     public function prepareCreateImagePayload($arg1)
@@ -77,7 +91,7 @@ class RequestFactory
     {
         $projectMapper = new MapperProject();
 
-        $projectMapper->setProject("Behat test",
+        $projectMapper->setProject("Behat test 12",
         "Behat test",
         "Behat test",
         "Behat test",
@@ -101,15 +115,35 @@ class RequestFactory
         ];
     }
 
+    public function prepareProjectUpdateRequestPayload($id)
+    {
+        return [
+            "id" => $id,
+            "projectName" => "BehatProject",
+            "description" => "Behat Update API Test"
+        ];
+    }
+
+    public function prepareOrderUpdateRequestPayload($id, $user, $project)
+    {
+        return [
+            "id" => $id,
+            "projectName" => $user,
+            "description" => $project
+        ];
+    }
+
     public function prepareCreateUserRequestPayload()
     {
         $userMapper = new MapperUser();
 
-        $userMapper->setUser("BehatUser1@test.com",
+        $userMapper->setUser("BehatUser123@test.com",
             "['ROLE_USER']",
             "000",
-            "BehatUser1",
-            "121224");
+            "BehatUser123",
+            "121224",
+            "2020-10-14"
+        );
 
         return $userMapper->getUserAsArray();
     }

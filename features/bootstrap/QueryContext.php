@@ -155,6 +155,14 @@ class QueryContext implements Context
         }
     }
 
+    /**
+     * @When /^I request all Featured Ideas$/
+     */
+    public function iRequestAllFeaturedIdeas()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API . 'FeaturedIdeas');
+    }
+
     use QueriesCommon;
     use QueryUser;
     use QueryArticle;

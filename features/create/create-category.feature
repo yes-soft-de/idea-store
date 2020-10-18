@@ -4,3 +4,4 @@ Feature: Create Category
     And I have a valid category data
     When I request category create with the data I have
     Then I should get a response code with "200"
+    And The json should contain the new category

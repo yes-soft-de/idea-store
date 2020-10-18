@@ -12,7 +12,7 @@ class MapperUser
     {
     }
 
-    public function setUser($email, $roles, $password, $userName, $phone)
+    public function setUser($email, $roles, $password, $userName, $phone, $createdTime)
     {
         $this->user = new ObjectUser();
 
@@ -21,7 +21,7 @@ class MapperUser
         $this->user->setPassword($password);
         $this->user->setUserName($userName);
         $this->user->setPhone($phone);
-        //$this->user->setCreatedTime($createdTime);
+        $this->user->setCreatedTime($createdTime);
     }
 
     /**
@@ -38,9 +38,11 @@ class MapperUser
     public function getUserAsArray(): array
     {
         return ["email"=>$this->user->getEmail(),
-            "role"=>$this->user->getRoles(),
+            "roles"=>$this->user->getRoles(),
             "password"=>$this->user->getPassword(),
             "userName"=>$this->user->getUserName(),
-            "phone"=>$this->user->getPhone()];
+            "phone"=>$this->user->getPhone(),
+            "createdTime"=>$this->user->getCreatedTime()
+        ];
     }
 }

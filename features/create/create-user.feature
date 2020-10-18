@@ -4,3 +4,4 @@ Feature: Create a user
     And I have a valid user data
     When I request user create with the data I have
     Then I should get a response code with "200"
+    And The json should contain the new user name
