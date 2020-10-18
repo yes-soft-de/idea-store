@@ -23,6 +23,8 @@ class ConfigLinks
 
     static $ORDER_ENDPOINT = 'order';
 
+    static $SPECIAL_IDEA_ENDPOINT = 'special-idea';
+
     static $CREATE_USER_ENDPOINT = 'register';
 
     static $USERS_QUERY_ENDPOINT = 'users';

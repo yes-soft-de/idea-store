@@ -59,14 +59,14 @@ class RequestFactory
         ];
     }
 
-    public function prepareCreateMessageRequestPayload($arg1)
-    {
-        $messageMapper = new MapperMessage();
-
-        $messageMapper->setMessage("Hello from Behat", $arg1,"2020-10-10");
-
-        return $messageMapper->getMessageAsArray();
-    }
+//    public function prepareCreateMessageRequestPayload($arg1)
+//    {
+//        $messageMapper = new MapperMessage();
+//
+//        $messageMapper->setMessage("Hello from Behat", $arg1,"2020-10-10");
+//
+//        return $messageMapper->getMessageAsArray();
+//    }
 
     public function prepareCreateImagePayload($arg1)
     {
@@ -131,6 +131,19 @@ class RequestFactory
             "projectName" => $user,
             "description" => $project
         ];
+    }
+
+    public function prepareCreateSpecialIdeaRequestPayload()
+    {
+        $specialIdeaMapper = new MapperSpecialIdea();
+
+        $specialIdeaMapper->setSpecialIdea(
+            "newSpecialIdeaBehat",
+            "Behat test for create new special idea",
+            "similarLinkTest"
+        );
+
+        return $specialIdeaMapper->getSpecialIdeaAsArray();
     }
 
     public function prepareCreateUserRequestPayload()

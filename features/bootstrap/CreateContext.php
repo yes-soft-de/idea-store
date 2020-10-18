@@ -47,6 +47,11 @@ class CreateContext implements Context
     private $message;
 
     /**
+     * @var array $specialIdea
+     */
+    private $specialIdea;
+
+    /**
      * Initializes context.
      *
      * Every scenario gets its own context instance.
@@ -262,42 +267,6 @@ class CreateContext implements Context
     }
 
     /**
-     * @Given /^I have a valid message data from userID "([^"]*)"$/
-     */
-    public function iHaveAValidMessageDataFromUserID($arg1)
-    {
-        $factory = new RequestFactory();
-
-        $this->message = $factory->prepareCreateMessageRequestPayload($arg1);
-    }
-
-    /**
-     * @When /^I request message create with the data I have$/
-     */
-    public function iRequestMessageCreateWithTheDataIHave()
-    {
-        $this->response = $this->httpClient->post(
-            ConfigLinks::$BASE_API . ConfigLinks::$MESSAGE_ENDPOINT . '/' . $this->message["user"],
-            [
-                "json" => $this->message
-            ]
-        );
-    }
-
-    /**
-     * @Then The json should contain the subject of the created message
-     */
-    public function theJsonShouldContainTheSubjectOfTheCreatedMessage()
-    {
-        $data = json_decode($this->response->getBody(), true);
-
-        if($data["Data"]["subject"] != "HelloBehat")
-        {
-            throw new Exception('Error in creating new message!');
-        }
-    }
-
-    /**
      * @When /^I request create an order with project ID "([^"]*)" and user ID "([^"]*)"$/
      */
     public function iRequestCreateAnOrderWithProjectIDAndUserID($arg1, $arg2)
@@ -317,6 +286,42 @@ class CreateContext implements Context
         if($data["Data"]["user"] == null || $data["Data"]["project"] == null)
         {
             throw new Exception('Error in creating new order!');
+        }
+    }
+
+    /**
+     * @Given /^I have a valid special idea data$/
+     */
+    public function iHaveAValidSpecialIdeaData()
+    {
+        $factory = new RequestFactory();
+
+        $this->specialIdea = $factory->prepareCreateSpecialIdeaRequestPayload();
+    }
+
+    /**
+     * @When I request create a special idea with the data I have and category ID :arg1
+     */
+    public function iRequestCreateASpecialIdeaWithTheDataIHaveAndCategoryId($arg1)
+    {
+        $this->response = $this->httpClient->post(
+            ConfigLinks::$BASE_API . ConfigLinks::$SPECIAL_IDEA_ENDPOINT . '/'. $arg1,
+            [
+                "json" => $this->specialIdea
+            ]
+        );
+    }
+
+    /**
+     * @Then The json should contain the new special idea
+     */
+    public function theJsonShouldContainTheNewSpecialIdea()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["ideaNew"] != "newSpecialIdeaBehat")
+        {
+            throw new Exception('Error in creating new special idea!');
         }
     }
 
