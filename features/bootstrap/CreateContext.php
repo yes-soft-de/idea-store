@@ -297,6 +297,29 @@ class CreateContext implements Context
         }
     }
 
+    /**
+     * @When /^I request create an order with project ID "([^"]*)" and user ID "([^"]*)"$/
+     */
+    public function iRequestCreateAnOrderWithProjectIDAndUserID($arg1, $arg2)
+    {
+        $this->response = $this->httpClient->post(
+            ConfigLinks::$BASE_API . ConfigLinks::$ORDER_ENDPOINT . '/' . $arg1 . '/' . $arg2
+        );
+    }
+
+    /**
+     * @Given /^The json should contain the new order$/
+     */
+    public function theJsonShouldContainTheNewOrder()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data["Data"]["user"] == null || $data["Data"]["project"] == null)
+        {
+            throw new Exception('Error in creating new order!');
+        }
+    }
+
 
     use CreateCommon;
 }
