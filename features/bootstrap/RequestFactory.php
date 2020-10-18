@@ -146,6 +146,13 @@ class RequestFactory
         return $specialIdeaMapper->getSpecialIdeaAsArray();
     }
 
+    public function prepareRequestWithSpecialIdeaId($id)
+    {
+        return [
+            "specialIdea" => $id
+        ];
+    }
+
     public function prepareCreateUserRequestPayload()
     {
         $userMapper = new MapperUser();

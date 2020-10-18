@@ -163,6 +163,30 @@ class QueryContext implements Context
         $this->response = $this->client->get(ConfigLinks::$BASE_API . 'FeaturedIdeas');
     }
 
+    /**
+     * @When /^I request special idea with ID "([^"]*)"$/
+     */
+    public function iRequestSpecialIdeaWithID($arg1)
+    {
+        $this->response = $this->client->get(
+            ConfigLinks::$BASE_API . ConfigLinks::$SPECIAL_IDEA_ENDPOINT . '/' . $arg1
+        );
+    }
+
+    /**
+     * @Then The json should contain valid new idea
+     */
+    public function theJsonShouldContainValidNewIdea()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data['Data']['id'] != "1")
+        {
+            throw new Exception('Error: requested special idea does not exist!');
+        }
+    }
+
+
     use QueriesCommon;
     use QueryUser;
     use QueryArticle;
