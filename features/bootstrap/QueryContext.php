@@ -186,6 +186,14 @@ class QueryContext implements Context
         }
     }
 
+    /**
+     * @When /^I request all special ideas$/
+     */
+    public function iRequestAllSpecialIdeas()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API . ConfigLinks::$SPECIAL_IDEA_ENDPOINT);
+    }
+
 
     use QueriesCommon;
     use QueryUser;

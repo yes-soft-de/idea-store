@@ -58,6 +58,16 @@ class DeleteContext implements Context
         );
     }
 
+    /**
+     * @When /^I request delete a special idea of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteASpecialIdeaOfID($arg1)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$SPECIAL_IDEA_ENDPOINT.'/'.$arg1
+        );
+    }
+
     use QueriesCommon;
     use DeleteCommon;
 }
