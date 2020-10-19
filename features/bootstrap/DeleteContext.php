@@ -68,6 +68,26 @@ class DeleteContext implements Context
         );
     }
 
+    /**
+     * @When /^I request delete an order of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteAnOrderOfID($arg1)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$ORDER_ENDPOINT.'/'.$arg1
+        );
+    }
+
+    /**
+     * @When /^I request delete a message of ID "([^"]*)"$/
+     */
+    public function iRequestDeleteAMessageOfID($arg1)
+    {
+        $this->response = $this->httpClient->delete(
+            ConfigLinks::$BASE_API.ConfigLinks::$MESSAGE_ENDPOINT.'/'.$arg1
+        );
+    }
+
     use QueriesCommon;
     use DeleteCommon;
 }
