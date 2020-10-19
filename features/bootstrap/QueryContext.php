@@ -194,6 +194,87 @@ class QueryContext implements Context
         $this->response = $this->client->get(ConfigLinks::$BASE_API . ConfigLinks::$SPECIAL_IDEA_ENDPOINT);
     }
 
+    /**
+     * @When /^I request project with ID "([^"]*)"$/
+     */
+    public function iRequestProjectWithID($arg1)
+    {
+        $this->response = $this->client->get(
+            ConfigLinks::$BASE_API . ConfigLinks::$PROJECT_ENDPOINT . '/' . $arg1);
+    }
+
+    /**
+     * @Given /^The json should contain a valid project$/
+     */
+    public function theJsonShouldContainAValidProject()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data['Data'][0] == null)
+        {
+            throw new Exception('Error: requested project does not exist!');
+        }
+    }
+
+    /**
+     * @When /^I request order with ID "([^"]*)"$/
+     */
+    public function iRequestOrderWithID($arg1)
+    {
+        $this->response = $this->client->get(
+            ConfigLinks::$BASE_API . ConfigLinks::$ORDER_ENDPOINT . '/' . $arg1);
+    }
+
+    /**
+     * @Given /^The json should contain a valid order$/
+     */
+    public function theJsonShouldContainAValidOrder()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data['Data'][0] == null)
+        {
+            throw new Exception('Error: requested order does not exist!');
+        }
+    }
+
+    /**
+     * @When /^I request all orders$/
+     */
+    public function iRequestAllOrders()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API . 'orders');
+    }
+
+    /**
+     * @When /^I request message with ID "([^"]*)"$/
+     */
+    public function iRequestMessageWithID($arg1)
+    {
+        $this->response = $this->client->get(
+            ConfigLinks::$BASE_API . ConfigLinks::$MESSAGE_ENDPOINT. '/' . $arg1);
+    }
+
+    /**
+     * @Given /^The json should contain a valid message$/
+     */
+    public function theJsonShouldContainAValidMessage()
+    {
+        $data = json_decode($this->response->getBody(), true);
+
+        if($data['Data']['user'] == null)
+        {
+            throw new Exception('Error: requested message does not exist!');
+        }
+    }
+
+    /**
+     * @When /^I request all messages$/
+     */
+    public function iRequestAllMessages()
+    {
+        $this->response = $this->client->get(ConfigLinks::$BASE_API . ConfigLinks::$MESSAGE_ENDPOINT);
+    }
 
     use QueriesCommon;
     use QueryUser;
